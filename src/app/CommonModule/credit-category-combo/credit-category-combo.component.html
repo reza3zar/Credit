@@ -1,0 +1,9 @@
+<!-- <ng-content></ng-content> -->
+<kendo-combobox [data]="dataCreditCategory" [textField]="'name'"
+[valueField]="'id'" [filterable]="true" [(ngModel)]="value"
+(filterChange)="handleFilterCreditCategories($event)"
+[placeholder]="'نام گروه'">
+<ng-template kendoComboBoxFooterTemplate>
+    <h4 class="changeStyleTota myOrginalFont" >{{dataCreditCategory.length}} قابل انتخاب</h4>
+</ng-template>
+ </kendo-combobox>

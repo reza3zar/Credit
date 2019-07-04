@@ -1,0 +1,78 @@
+
+<kendo-grid [data]="gridData"   [resizable]="true" [sortable]="{ mode: 'multiple' }"
+[selectable]="{ mode: 'single'}"   (sortChange)="sortChange($event)"
+[sortable]="{
+allowUnsort: true,
+mode: 'multiple'
+}" [sort]="sort" [pageSize]="pageSize" [skip]="skip"
+[pageable]="true" [filter]="filter" (filterChange)="filterChange($event)" [filterable]="true" (pageChange)="pageChange($event)"
+>
+
+<ng-template kendoGridToolbarTemplate>
+
+
+</ng-template>
+
+<kendo-grid-messages
+noRecords="رکوردی برای نمایش یافت نشد!"
+pagerItems="کل رکورد"
+pagerOf ="از"
+sortedAscending="به صورت صعودی"
+sortedDescending="به صورت نزولی"
+filter="جستجو"
+columns="انتخاب سر ستون"
+>
+</kendo-grid-messages>
+
+<kendo-grid-column field="operationString" title="نوع عملیات"   [filterable]="false">
+</kendo-grid-column>
+<kendo-grid-column field="timeString" title="زمان"  [filterable]="false">
+</kendo-grid-column>
+
+
+
+
+
+    <kendo-grid-column field="سقف قبل" >
+            <ng-template kendoGridCellTemplate let-dataItem  >
+                <span [style.color]="dataItem.colorString">
+                        {{dataItem.oldValues.ceilingAmount | number}}
+                </span>
+            </ng-template>
+        </kendo-grid-column>
+
+
+
+        <kendo-grid-column field="سقف بعد" >
+                <ng-template kendoGridCellTemplate let-dataItem  >
+                    <span [style.color]="dataItem.colorString">
+                            {{dataItem.newValues.ceilingAmount | number}}
+                    </span>
+                </ng-template>
+            </kendo-grid-column>
+
+<kendo-grid-column field="oldValues.dueDateString" title="تاریخ سر رسید قبل" [filterable]="false">
+</kendo-grid-column>
+
+<kendo-grid-column field="newValues.dueDateString" title="تاریخ سر رسید بعد" [filterable]="false">
+    </kendo-grid-column>
+
+<kendo-grid-column field="oldValues.statusString" title="وضعیت قبل" [filterable]="false">
+    </kendo-grid-column>
+    <kendo-grid-column field="newValues.statusString" title="وضعیت بعد" [filterable]="false">
+        </kendo-grid-column>
+
+        <kendo-grid-column title="کاربر " field='user' width="160" >
+                <ng-template kendoGridCellTemplate let-dataItem  >
+                    <span [style.color]="dataItem.colorString">
+                            {{dataItem.user }}
+                    </span>
+                </ng-template>
+            </kendo-grid-column>
+
+        <kendo-grid-column field="description" title="توضیحات" [filterable]="false">
+            </kendo-grid-column>
+
+
+
+<div *ngIf="loadingGrid" class="k-i-loading"></div>

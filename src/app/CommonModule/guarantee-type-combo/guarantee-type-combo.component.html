@@ -1,0 +1,18 @@
+<kendo-combobox
+    [data]="dataguarantees"
+    [textField]="'displayName'"
+    [valueField]="'id'"
+    [filterable]="true"
+    [disabled]=disabled
+    (filterChange)="handleFilterguarantees($event)"
+    name="displayName"
+    [(ngModel)]="value"
+    [placeholder]="'نوع گارانتی'"
+>
+
+<ng-template kendoComboBoxFooterTemplate>
+    <h4 class="changeStyleTota myOrginalFont" >{{dataguarantees.length}} قابل انتخاب</h4>
+</ng-template>
+
+
+</kendo-combobox>

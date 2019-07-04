@@ -1,0 +1,208 @@
+<div class="example-wrapper container-fluid screen-Active" style="height: 100%; width: 100% ">
+        <div class="row" class="screen-Active" style="height: 100%; width: 100%;margin: 0">
+            <div class="col-xs-12 col-sm-12 example-col" class="panelbar-wrapper">
+                <app-close-side-nav></app-close-side-nav>
+                <kendo-tabstrip style="margin-top: 4px;margin-bottom: 2px;margin-left: 35px;margin-right: 6px">
+                    <kendo-tabstrip-tab [title]="'جستجو'" [selected]="true" *ngIf="panelType=='searchMode'"  >
+                        <ng-template kendoTabContent>
+                            <div class="panel panel-default credit-card-box" style="margin-top: 4px;margin-bottom: 2px;margin-left: 5px;margin-right: 6px">
+                                <div class="panel-heading  ">
+                                    <div class="row display-tr">
+                                        <h3 class="panel-title display-tdhead">پنل جستجو</h3>
+                                        <div class="display-td">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+
+
+                                    <form role="form" id="payment-form">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+                                                <input type="radio" name="creditRadioBtn" id="radio1" class="k-radio"
+                                                    (change)="changeCreditsOptions('credit')" [checked]="this.creditOptionType==='credit'" />
+                                                <label class="k-radio-label" for="radio1">تمامی اعتبارات</label>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+                                                <input type="radio" name="group" id="radio2" class="k-radio" (change)="changeCreditsOptions('customer')"
+                                                    [checked]="this.creditOptionType==='customer'" />
+                                                <label class="k-radio-label" for="radio2">اعتبارات مشتریان</label>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+                                                <input type="radio" name="group" class="k-radio" id="radio3" (change)="changeCreditsOptions('broker')"
+                                                    [checked]="this.creditOptionType==='broker'" />
+                                                <label class="k-radio-label" for="radio3">اعتبارات کارگزاران</label>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+                                                <label for="customerName">نام مشتری:</label>
+                                                <app-customer-combo  name="customerId" [(ngModel)]="searchCreditDTO.customer"></app-customer-combo>
+
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+                                                <label for="customerBroker">نام کارگزار:</label>
+                                                <app-broker-combo name="brokerId" [(ngModel)]="searchCreditDTO.broker"></app-broker-combo>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+                                                <label for="customerBank">نام بانک:</label>
+                                                <app-bank-combo name="bankId" [(ngModel)]="searchCreditDTO.bank"></app-bank-combo>
+                                            </div>
+                                        </div>
+
+                                        <!-- ------------------------------- -->
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+                                                <label for="creditCategory">نام گروه:</label>
+                                                <app-credit-category-combo  name="creditCategoryId" [(ngModel)]="searchCreditDTO.creditCategory"></app-credit-category-combo>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+                                                <label for="creditCategory">حداقل مبلغ:</label>
+                                                <kendo-numerictextbox [format]="'n2'" [(ngModel)]="searchCreditDTO.minValue"
+                                                    name="minValueCredit" [value]="0"></kendo-numerictextbox>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+                                                <label for="creditCategory">حداکثر مبلغ:</label>
+
+                                                <kendo-numerictextbox [format]="'n2'" [(ngModel)]="searchCreditDTO.maxValue"
+                                                    name="maxValueCredit" [value]="0"></kendo-numerictextbox>
+                                            </div>
+                                        </div>
+                                        <!-- ------------------------------- -->
+                                        <br>
+
+                                        <div class="row justify-content-center">
+
+                                            <div class="col-sm-12 col-lg-5">
+                                                <label for="dueDate">تاریخ تحویل از :</label>
+                                                <dp-date-picker  class="form-control" dir="rtl" name="dateCreations" [(ngModel)]="searchDueDateForm"
+                                                    mode="day" placeholder="از تاریـــخ" theme="dp-material">
+                                                </dp-date-picker>
+
+                                            </div>
+
+
+                                            <div class="col-sm-12 col-lg-5">
+                                                <label for="dueDate">تاریخ تحویل تا :</label>
+                                                <dp-date-picker class="form-control" dir="rtl" name="dateCreations" [(ngModel)]="searchDueDateTo"
+                                                    mode="day" placeholder="تا تاریـــخ" theme="dp-material">
+                                                </dp-date-picker>
+
+                                            </div>
+
+                                            <!-- <div class="col-sm-12 col-lg-4">
+                                                <label for="BranchName">نام شعبه بانک:</label>
+                                                <input name="username" autocomplete="off" [(ngModel)]="searchCreditDTO.branchName"
+                                                    name="branchName" type="text" class="form-control" required />
+                                            </div> -->
+                                            <div class="col-sm-12 col-lg-2">
+                                                <label for="">عملیات</label>
+                                                <button class="btn btn-raised btn-info" (click)="someAction($event)"
+                                                    >جستجو
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <br>
+
+                                        <div class="row " style="min-height: 250px;">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </kendo-tabstrip-tab>
+                    <kendo-tabstrip-tab [title]="'جزئیات'" [selected]="true" *ngIf="panelType=='showMode'">
+                        <ng-template kendoTabContent>
+                            <div class="panel panel-default credit-card-box" style="margin-top: 4px;margin-bottom: 2px;margin-left: 5px;margin-right: 6px">
+                                <div class="panel-heading  ">
+                                    <div class="row display-tr">
+                                        <h3 class="panel-title display-tdhead">پنل جزئیات</h3>
+                                        <div class="display-td">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row justify-content-center">
+
+                                        <div class="col-sm-12 col-lg-4 col-md-4">
+                                            <label for="id">شماره :</label>
+                                            <input name="id" autocomplete="off" [(ngModel)]="creditItemDetail.id" type="text"
+                                                class="form-control" disabled=true />
+                                        </div>
+                                        <div class="col-sm-12 col-lg-4 col-md-4">
+                                            <label for="value">مبلغ :</label>
+                                            <input name="value" autocomplete="off" [(ngModel)]="creditItemDetail.value"
+                                                type="text" class="form-control" disabled=true />
+                                        </div>
+                                        <div class="col-sm-12 col-lg-4 col-md-4">
+                                            <label for="customerName">تضمین دهنده :</label>
+                                            <input name="customerName" autocomplete="off" [(ngModel)]="creditItemDetail.principal"
+                                                type="text" class="form-control" disabled=true />
+
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row justify-content-center">
+
+                                        <div class="col-sm-12 col-lg-4 col-md-4">
+                                            <label for="bankName">نام بانک :</label>
+                                            <input name="bankName" autocomplete="off" [(ngModel)]="creditItemDetail.bank.name"
+                                                type="text" class="form-control" disabled=true />
+                                        </div>
+                                        <div class="col-sm-12 col-lg-4 col-md-4">
+                                            <label for="branchName">شعبه :</label>
+                                            <input name="branchName" autocomplete="off" [(ngModel)]="creditItemDetail.branchName"
+                                                type="text" class="form-control" disabled=true />
+                                        </div>
+                                        <div class="col-sm-12 col-lg-4 col-md-4">
+                                            <label for="categoryname">کد شعبه :</label>
+                                            <input name="categoryname" autocomplete="off" [(ngModel)]="creditItemDetail.branchCode"
+                                                type="text" class="form-control" disabled=true />
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row justify-content-center">
+
+                                        <!-- <div class="col-sm-12 col-lg-4 col-md-4">
+                                                    <label for="categoryname">نوع ضمانت :</label>
+                                                    <input name="categoryname" autocomplete="off" [(ngModel)]="creditItemDetail.category.Name"
+                                                        type="text" class="form-control" disabled=true />
+                                                </div> -->
+
+                                        <div class="col-sm-12 col-lg-5">
+                                            <label for="dueDate">تاریخ ایجاد:</label>
+                                            <dp-date-picker dir="rtl" disabled=true name="dateCreation" [(ngModel)]="dateCreation"
+                                                mode="day" placeholder="تاریخ" theme="dp-material">
+                                            </dp-date-picker>
+
+                                        </div>
+
+                                        <div class="col-sm-12 col-lg-5">
+                                                <label for="dueDate">تاریخ تحویل:</label>
+                                                <dp-date-picker dir="rtl" disabled=true [(ngModel)]="dueDate" name="dueDate"
+                                                    mode="day" placeholder="تاریخ" theme="dp-material">
+                                                </dp-date-picker>
+                                            </div>
+
+
+
+                                    </div>
+                                    <br>
+
+
+                                    <div class="row " style="min-height: 20px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </kendo-tabstrip-tab>
+                </kendo-tabstrip>
+
+
+
+            </div>
+        </div>
+    </div>

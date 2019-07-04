@@ -1,0 +1,16 @@
+.parent-item{
+  font-size: medium;
+  border-bottom: 1px solid #d6d6d6;
+
+  border-right: 0;
+
+  border-left: 0;
+
+  margin-bottom: 0px;
+}
+.myposition{
+  width: 14.13%;
+}
+div{
+  direction: rtl;
+}

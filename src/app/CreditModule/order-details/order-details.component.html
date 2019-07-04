@@ -1,0 +1,91 @@
+<kendo-grid *ngIf="!loadingGrid"
+    [data]="gridData"
+    [resizable]="true"
+    [sortable]="{ mode: 'multiple' }"
+    [selectable]="{ mode: 'single' }"
+    (sortChange)="sortChange($event)"
+    [sortable]="{
+        allowUnsort: true,
+        mode: 'multiple'
+    }"
+    [sort]="sort"
+    [pageSize]="pageSize"
+    [skip]="skip"
+    [pageable]="true"
+    [filter]="filter"
+    (filterChange)="filterChange($event)"
+    [filterable]="true"
+    (pageChange)="pageChange($event)"
+>
+    <ng-template kendoGridToolbarTemplate>
+        <div   class="row">
+            <div class="col-lg-3">
+                <h5>ارزش مازاد:   {{order.surplus | number}}</h5>
+            </div>
+            <div class="col-lg-3">
+                <h5>تاریخ عرضه : {{order.supplyDateString}}</h5>
+            </div>
+
+            <div class="col-lg-3">
+                <h5> مجاز به استفاده از اعتبار کارگزاری: {{order.privilegedToUseBrokerCreditString}}</h5>
+            </div>
+
+            <div class="col-lg-3">
+                <h5>مجاز به استفاده از اعتبار نامه بالاسری: {{order.privilegedToUseFormalLetterCreditString}}</h5>
+            </div>
+        </div>
+
+        <kendo-grid-messages
+            noRecords="رکوردی برای نمایش یافت نشد!"
+            pagerItems="کل رکورد"
+            pagerOf="از"
+            sortAscending="صعودی"
+            sortDescending="نزولی"
+            filter="جستجو"
+            columns="انتخاب سر ستون"
+            columnsApply="اعمال"
+            columnsReset="باز نشانی"
+        >
+        </kendo-grid-messages>
+
+        <kendo-grid-column
+            field="contractNumber"
+            title="شماره قرارداد"
+            [filterable]="false"
+        >
+        </kendo-grid-column>
+        <kendo-grid-column
+            field="assignmentId"
+            title="شماره جز"
+            [filterable]="false"
+        >
+        </kendo-grid-column>
+
+        <kendo-grid-column field="ارزش قرارداد" [filterable]="false">
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <span>
+                    {{ dataItem.value | number }}
+                </span>
+            </ng-template>
+        </kendo-grid-column>
+
+        <kendo-grid-column
+            field="statusString"
+            title="وضعیت"
+            [filterable]="false"
+        >
+        </kendo-grid-column>
+        <kendo-grid-column
+            field="isVirtualString"
+            title="وضعیت تخصیص"
+            [filterable]="false"
+        >
+        </kendo-grid-column>
+
+        </ng-template>
+    </kendo-grid>
+
+
+
+
+    <div *ngIf="loadingGrid" class="k-i-loading"></div>

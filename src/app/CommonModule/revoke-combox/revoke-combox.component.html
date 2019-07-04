@@ -1,0 +1,14 @@
+<kendo-combobox
+    [data]="dataBanks"
+    [textField]="'name'"
+    [valueField]="'id'"
+    [filterable]="true"
+    (filterChange)="handleFilterBanks($event)"
+    name="bankName"
+    [(ngModel)]="value"
+    [placeholder]="'انتخاب '"
+>
+<ng-template kendoComboBoxFooterTemplate>
+    <h4 class="changeStyleTota myOrginalFont" >{{dataBanks.length}} قابل انتخاب</h4>
+</ng-template>
+</kendo-combobox>

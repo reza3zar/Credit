@@ -1,0 +1,18 @@
+<kendo-combobox
+    [data]="dataBrokers"
+    [textField]="'name'"
+    [valueField]="'brokerId'"
+    [filterable]="true"
+    [disabled]=disabled
+    (filterChange)="handleFilterBrokers($event)"
+    name="BrokerName"
+    [(ngModel)]="value"
+    [placeholder]="'نام کارگزار'"
+>
+
+<ng-template kendoComboBoxFooterTemplate>
+    <h4 class="changeStyleTota myOrginalFont" >{{dataBrokers.length}} قابل انتخاب</h4>
+</ng-template>
+
+
+</kendo-combobox>

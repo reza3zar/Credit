@@ -1,0 +1,255 @@
+
+
+<form role="form" id="payment-form" style="margin-top: 4%">
+
+
+<div class="radio-tile-group">
+
+    <div class="input-container">
+      <input id="walk" class="radio-button"  [checked]="this.orderOptentionSelected==='readytotrade'" (click)="changeOrdersOptions('readytotrade')" type="radio" name="radio" />
+      <div class="radio-tile">
+        <div class="icon walk-icon">
+            <svg   width="24" height="24" viewBox="0 0 24 24"><path d="M22 5.72l-4.6-3.86-1.29 1.53 4.6 3.86L22 5.72zM7.88 3.39L6.6 1.86 2 5.71l1.29 1.53 4.59-3.85zM12.5 8H11v6l4.75 2.85.75-1.23-4-2.37V8zM12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+        </div>
+        <label for="walk" class="radio-tile-label"> آماده معامله</label>
+      </div>
+    </div>
+
+    <div class="input-container">
+      <input id="bike" class="radio-button"   [checked]="this.orderOptentionSelected==='traded'" (click)="changeOrdersOptions('traded')" type="radio" name="radio" />
+      <div class="radio-tile">
+        <div class="icon bike-icon">
+            <svg   width="24" height="24" viewBox="0 0 24 24"><path d="M18 7l-1.41-1.41-6.34 6.34 1.41 1.41L18 7zm4.24-1.41L11.66 16.17 7.48 12l-1.41 1.41L11.66 19l12-12-1.42-1.41zM.41 13.41L6 19l1.41-1.41L1.83 12 .41 13.41z"/></svg>
+        </div>
+        <label for="bike" class="radio-tile-label"> معامله شده</label>
+      </div>
+    </div>
+
+    <div class="input-container">
+      <input id="drive" class="radio-button" [checked]="this.orderOptentionSelected==='nottraded'"  (click)="changeOrdersOptions('nottraded')" type="radio" name="radio" />
+      <div class="radio-tile">
+        <div class="icon car-icon">
+                <svg   width="24" height="24" viewBox="0 0 24 24"><path d="M14.59 8L12 10.59 9.41 8 8 9.41 10.59 12 8 14.59 9.41 16 12 13.41 14.59 16 16 14.59 13.41 12 16 9.41 14.59 8zM12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+        </div>
+        <label for="drive" class="radio-tile-label"> معامله نشده</label>
+      </div>
+    </div>
+
+    <div class="input-container">
+      <input id="fly" class="radio-button" [checked]="this.orderOptentionSelected==='archived'" (click)="changeOrdersOptions('archived')"  type="radio" name="radio" />
+      <div class="radio-tile">
+        <div class="icon fly-icon">
+            <svg   width="24" height="24" viewBox="0 0 24 24"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>
+        </div>
+        <label for="fly" class="radio-tile-label"> بایگانی شده</label>
+      </div>
+    </div>
+
+
+</div>
+
+
+</form>
+
+
+<kendo-grid [data]="gridData" (cellClick)="onCellClick($event)" [resizable]="true" [sortable]="{ mode: 'multiple' }"
+[selectable]="{ mode: 'single'}" (selectionChange)="selected($event)" (sortChange)="sortChange($event)"
+[sortable]="{
+allowUnsort: true,
+mode: 'multiple'
+}" [sort]="sort"
+[columnMenu]="{ columnChooser: false }"
+[pageSize]="pageSize" [skip]="skip"
+[pageable]="true" [filter]="filter"
+ (filterChange)="filterChange($event)"
+ filterable="menu"
+
+(pageChange)="pageChange($event)"
+(dataStateChange)="dataStateChange($event)"
+[skip]="skip"
+[height]="646">
+
+
+<kendo-grid-messages
+noRecords="رکوردی برای نمایش یافت نشد!"
+pagerItems="کل رکورد"
+pagerOf ="از"
+sortAscending="صعودی"
+sortDescending="نزولی"
+filter="جستجو"
+columns="انتخاب سر ستون"
+columnsApply="اعمال"
+columnsReset="باز نشانی"
+
+pagerItemsPerPage="تعداد نمایش "
+filterClearButton="پاک کن"
+filterFilterButton ="جستجو"
+filterEqOperator="برابر با"
+filterGtOperator="بزرگتر از"
+filterGteOperator="بزرگتر مساوی با"
+filterContainsOperator="شامل"
+filterOrLogic="یا"
+filterAndLogic="و"
+>
+</kendo-grid-messages>
+
+<ng-template kendoGridToolbarTemplate>
+
+        <kendo-grid-column-chooser style="float:left;"></kendo-grid-column-chooser>
+
+    <button type="button" kendoButton   kendoGridExcelCommand style="margin-left: 2px;margin-right: 2px">خروجی
+        به اکسل</button>
+        <button (click)="refresh()" kendoButton type="button">
+            به روز رسانی
+        </button>
+
+        <button (click)="showConfirmForm()" kendoButton type="button">
+            همگام سازی سفارشات
+        </button>
+
+        <!-- <ng-template kendoPagerTemplate let-totalPages="totalPages" let-currentPage="currentPage">
+            <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+            <kendo-pager-info></kendo-pager-info>
+            <kendo-pager-next-buttons></kendo-pager-next-buttons>
+            <kendo-pager-page-sizes [pageSizes]="[12, 120, 240]"></kendo-pager-page-sizes>
+         </ng-template> -->
+
+         <ng-template kendoPagerTemplate let-totalPages="totalPages" let-currentPage="currentPage">
+            <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+            <kendo-pager-numeric-buttons [buttonCount]="12"></kendo-pager-numeric-buttons>
+            <kendo-pager-info></kendo-pager-info>
+            <kendo-pager-next-buttons></kendo-pager-next-buttons>
+            <kendo-pager-page-sizes [pageSizes]="[12, 120, 240]"></kendo-pager-page-sizes>
+         </ng-template>
+</ng-template>
+
+
+<kendo-grid-messages
+noRecords="رکوردی برای نمایش یافت نشد!"
+pagerItems="کل رکورد"
+pagerOf ="از"
+sortAscending="صعودی"
+sortDescending="نزولی"
+filter="جستجو"
+columns="انتخاب سر ستون"
+columnsApply="اعمال"
+columnsReset="باز نشانی"
+>
+</kendo-grid-messages>
+
+
+<kendo-grid-column field="orderId" filter="numeric"   title="شناسه سفارش"  [filterable]="true" >
+</kendo-grid-column>
+<kendo-grid-column field="customerName" title="نام مشتری"  [width]=270 [filterable]="true">
+</kendo-grid-column>
+
+
+<kendo-grid-column field="guaranteeTypeString" title="نوع ضمانت" [filterable]="true"   >
+    </kendo-grid-column>
+<kendo-grid-column field="statusString" title="وضعیت سفارش" [filterable]="true"  >
+</kendo-grid-column>
+
+<!-- <kendo-grid-column field="deliveryDateString" title=" تاریخ تحویل" [filterable]="true">
+</kendo-grid-column> -->
+
+
+
+
+<kendo-grid-column field="deliveryDateString" title="تاریخ تحویل" [filterable]="true"   >
+</kendo-grid-column>
+
+
+<kendo-grid-column title="میزان بلــوکه" field="guarantee.totalGuarantee" [filterable]="true"  filter="numeric" format= "{0:n}">
+
+</kendo-grid-column>
+
+
+<kendo-grid-column title=" سهم مشتری " field="guarantee.customerShare" [filterable]="true"  filter="numeric" format= "{0:n}">
+
+</kendo-grid-column>
+
+<kendo-grid-column title=" سهم کارگزاری " field="guarantee.brokerShare" [filterable]="true"  filter="numeric" format= "{0:n}">
+
+</kendo-grid-column>
+
+
+<kendo-grid-column title=" سهم نامه بالاسری " field="guarantee.letterShare" [filterable]="true"  filter="numeric" format= "{0:n}">
+
+</kendo-grid-column>
+
+
+<kendo-grid-column title=" کسری " field="guarantee.shortage" [filterable]="true"  filter="numeric" format= "{0:n}">
+
+</kendo-grid-column>
+
+<kendo-grid-column field="عملیات"    [filterable]="false">
+    <ng-template kendoGridCellTemplate let-dataItem>
+
+
+        <div class="row" style="margin-right: 1px " kendoTooltip  >
+            <button
+            title="همگام‌سازی سفارش"
+                type="button"
+                (click)="synchronizeByOrderId(dataItem.orderId)"
+                [disabled]="checkIsSelectedRow(dataItem.orderId)"
+
+                class="btn btn-primary  btn-circle"
+            >
+            <i class="fa fa-refresh" aria-hidden="true"></i>
+
+
+            </button>
+
+        </div>
+    </ng-template>
+</kendo-grid-column>
+
+
+
+<div *kendoGridDetailTemplate="let dataItem">
+    <app-order-details [orderId]="dataItem.orderId"></app-order-details>
+</div>
+
+
+<ng-template kendoGridDetailTemplate let-dataItem>
+        <section *ngIf="dataItem.guarantee">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12"> <p><strong>سهم مشتری:</strong> {{dataItem.guarantee.customerShare}} </p></div>
+
+          <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12"><p><strong>سهم کارگزاری:</strong> {{dataItem.guarantee.brokerShare}} </p></div>
+          <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12"><p><strong>  سهم نامه بالاسری:</strong> {{dataItem.guarantee.letterShare}} </p></div>
+          <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12"><p><strong>کسری:</strong> {{dataItem.guarantee.shortage}}</p></div>
+        </div>
+        </section>
+ </ng-template>
+
+<kendo-grid-excel fileName="credits.xlsx" [fetchData]="allData"></kendo-grid-excel>
+</kendo-grid>
+
+
+<div class="example-wrapper">
+    <kendo-dialog
+        title="فرم تــــاییدیه"
+        *ngIf="confirmFormStatus"
+        (close)="closeConfirmForm()"
+        [minWidth]="250"
+        [width]="450"
+    >
+        <p style="margin: 30px; text-align: center;">
+            آیا از اعمال همگام‌سازی تمامی سفارشات اطمینان دارید؟
+        </p>
+
+
+
+        <kendo-dialog-actions>
+            <button kendoButton (click)="closeConfirmForm()" primary="true">
+                خیر
+            </button>
+            <button kendoButton  *ngIf="sendDataToServer"  (click)="synchronizeOrders()">در حال همگام سازی</button>
+
+            <button kendoButton  *ngIf="!sendDataToServer"  (click)="synchronizeOrders()">بلی</button>
+        </kendo-dialog-actions>
+    </kendo-dialog>
+</div>
+
+<div *ngIf="loadingGrid" class="k-i-loading"></div>

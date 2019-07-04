@@ -1,0 +1,14 @@
+header {
+  padding:0 !important;
+  /*;margin:35px;*/
+}
+.underlineCustom{
+  /*border-bottom:1px solid red;*/
+}
+
+div{
+  direction: rtl;
+}
+.links{
+  direction: rtl;
+}

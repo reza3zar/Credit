@@ -1,0 +1,48 @@
+<div   id="menuChild" style="direction: rtl" >
+<ul>
+<li   *ngFor="let sub of subCategories">
+  <a class="item"   (mouseenter)="mouseoverDone(true,sub?.id)"  (click)="onNavigate(sub)">{{sub?.name}} <span *ngIf="hasChildren(sub?.id)">&rsaquo;</span></a>
+  <div  [class.dropdown-menu]="flag && sub?.id==myCatId"
+        [style.display]="flag && sub?.id==myCatId && hasChildren(myCatId) ? 'block' : 'none'"
+        *ngIf="flag && sub?.id==myCatId && hasChildren(myCatId)">
+    <app-menu-item [categories]="categories"  [catId]="myCatId"></app-menu-item>
+  </div>
+</li>
+</ul>
+</div>
+
+
+<!--<div>-->
+  <!--<ul>-->
+    <!--<li><a href="category.html">آقایان <span>&rsaquo;</span></a>-->
+      <!--<div class="dropdown-menu">-->
+        <!--<ul>-->
+          <!--<li><a href="category.html">زیردسته ها</a></li>-->
+          <!--<li><a href="category.html">زیردسته ها</a></li>-->
+          <!--<li><a href="category.html">زیردسته ها</a></li>-->
+          <!--<li><a href="category.html">زیردسته ها</a></li>-->
+          <!--<li><a href="category.html">زیردسته جدید</a></li>-->
+        <!--</ul>-->
+      <!--</div>-->
+    <!--</li>-->
+    <!--<li><a href="category.html" >بانوان</a> </li>-->
+    <!--<li><a href="category.html">دخترانه<span>&rsaquo;</span></a>-->
+      <!--<div class="dropdown-menu">-->
+        <!--<ul>-->
+          <!--<li><a href="category.html">زیردسته ها </a></li>-->
+          <!--<li><a href="category.html">زیردسته جدید</a></li>-->
+          <!--<li><a href="category.html">زیردسته جدید</a></li>-->
+        <!--</ul>-->
+      <!--</div>-->
+    <!--</li>-->
+    <!--<li><a href="category.html">پسرانه</a></li>-->
+    <!--<li><a href="category.html">نوزاد</a></li>-->
+    <!--<li><a href="category.html">لوازم <span>&rsaquo;</span></a>-->
+      <!--<div class="dropdown-menu">-->
+        <!--<ul>-->
+          <!--<li><a href="category.html">زیردسته های جدید</a></li>-->
+        <!--</ul>-->
+      <!--</div>-->
+    <!--</li>-->
+  <!--</ul>-->
+<!--</div>-->

@@ -1,0 +1,32 @@
+<div *ngIf="bannerState==3">
+
+  <div class="marketshop-banner row" >
+    <div  *ngFor="let banner of this.banners">
+      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <a href="#">
+          <img alt={{banner?.alt}}
+               src={{banner?.src}}
+               title={{banner?.title}}>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="bannerState==2">
+
+  <div class="marketshop-banner row" >
+    <div  *ngFor="let banner of this.banners">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <a href="#">
+          <img src={{banner?.src}}
+               alt={{banner?.alt}}
+               title={{banner?.title}}/>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+

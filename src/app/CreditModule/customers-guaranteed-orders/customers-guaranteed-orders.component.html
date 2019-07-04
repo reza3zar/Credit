@@ -1,0 +1,101 @@
+
+<kendo-grid [data]="gridData"   [resizable]="true" [sortable]="{ mode: 'multiple' }"
+[selectable]="{ mode: 'single'}" (selectionChange)="selected($event)" (sortChange)="sortChange($event)"
+[sortable]="{
+allowUnsort: true,
+mode: 'multiple'
+}" [sort]="sort" [pageSize]="pageSize" [skip]="skip"
+[pageable]="true" [filter]="filter" (filterChange)="filterChange($event)" [filterable]="true" (pageChange)="pageChange($event)"
+  >
+
+<ng-template kendoGridToolbarTemplate  >
+
+</ng-template>
+
+<kendo-grid-messages
+noRecords="رکوردی برای نمایش یافت نشد!"
+pagerItems="کل رکورد"
+pagerOf ="از"
+sortAscending="صعودی"
+sortDescending="نزولی"
+filter="جستجو"
+columns="انتخاب سر ستون"
+columnsApply="اعمال"
+columnsReset="باز نشانی"
+>
+</kendo-grid-messages>
+
+
+<div *kendoGridDetailTemplate="let dataItem">
+        <app-order-details [orderId]="dataItem.orderId"></app-order-details>
+</div>
+
+<kendo-grid-column field="orderId" title="شناسه سفارش" width="240" [filterable]="false">
+</kendo-grid-column>
+<kendo-grid-column field="guaranteeTypeString" title="نوع ضمانت" width="240" [filterable]="false">
+</kendo-grid-column>
+<kendo-grid-column field="statusString" title="وضعیت سفارش" [filterable]="false">
+</kendo-grid-column>
+
+
+<kendo-grid-column field="میزان بلوکه"  [filterable]="false">
+    <ng-template kendoGridCellTemplate let-dataItem  >
+        <span >
+                {{dataItem.guarantee.totalGuarantee | number}}
+        </span>
+    </ng-template>
+</kendo-grid-column>
+
+
+
+
+<kendo-grid-column field="سهم اعتبارات مشتری"  [filterable]="false">
+    <ng-template kendoGridCellTemplate let-dataItem  >
+        <span >
+                {{dataItem.guarantee.customerShare | number}}
+        </span>
+    </ng-template>
+</kendo-grid-column>
+
+
+
+<kendo-grid-column field="سهم اعتبارات کارگزاری"  [filterable]="false">
+    <ng-template kendoGridCellTemplate let-dataItem  >
+        <span >
+                {{dataItem.guarantee.brokerShare | number}}
+        </span>
+    </ng-template>
+</kendo-grid-column>
+
+
+
+
+<kendo-grid-column field="سهم نامــه بالاسری"  [filterable]="false">
+    <ng-template kendoGridCellTemplate let-dataItem  >
+        <span >
+                {{dataItem.guarantee.letterShare | number}}
+        </span>
+    </ng-template>
+</kendo-grid-column>
+
+
+
+
+<kendo-grid-column field="کسری" [filterable]="false">
+    <ng-template kendoGridCellTemplate let-dataItem  >
+        <span >
+                {{dataItem.guarantee.shortage | number}}
+        </span>
+    </ng-template>
+</kendo-grid-column>
+
+
+
+
+
+<kendo-grid-excel fileName="credits.xlsx" [fetchData]="allData"></kendo-grid-excel>
+</kendo-grid>
+
+
+
+<div *ngIf="loadingGrid" class="k-i-loading"></div>

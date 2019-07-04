@@ -1,0 +1,137 @@
+  <!-- <body   >
+    <div class="wrapper-wide myOrginalFont   " aria-hidden="true"   >
+
+        <app-header   [ngClass]="{'fullscreen-inActive':state}"></app-header>
+
+
+        <div id="container">
+            <div class="container-fluid  "  >
+                    <div class="col-12"  *ngIf="loading">
+                            <div class="loading">
+                              <div class="js-loading-indicator triple"></div>
+                            </div>
+                          </div>
+
+                <div class="row ">
+                    <app-left-side  [ngClass]="{'fullscreen-inActive':state}"></app-left-side>
+
+                    <div id="content"   class="col-sm-10 ">
+                        <div class="progress " *ngIf="progress"><span class="progress-round-turquise"></span></div>
+
+                         <router-outlet>
+                         </router-outlet>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       <app-footer [ngClass]="{'fullscreen-inActive':state}"></app-footer>
+
+
+    </div>
+    </body>
+
+ -->
+
+ <div class="window-margin myOrginalFont"    >
+	<div  class="window">
+
+
+
+
+
+		<aside class="sidebar"  [@slideInOut]="mymenuState" >
+
+                <div class="top-bar" [ngClass]="{'fullscreen-inActive':state}">
+                <i  *ngIf="!showSideBarIcon"   style="margin-top: 14px; margin-right: 5px;  float: right" (click)="changeStateSideBar(true)" class="fa fa-2x   fa-bars changeCursor"></i>
+
+                        <p class="logo myOrginalFont"  >سامانه تضامین</p>
+                  </div>
+
+                    <div class="search-box">
+                        <div class="profile-box" [ngClass]="{'fullscreen-inActive':state}">
+                            <img    class="usericon" src="../../../assets/image/name.png">
+                        <a   *ngIf="isUserInfoLoaded"   style="color:lemonchiffon ; vertical-align: middle" >{{this.user?.displayName}}</a>
+                       <a  *ngIf="!isUserInfoLoaded">
+                        <app-content-loader  [numberLines]="1"></app-content-loader>
+                       </a>
+
+                        <!-- <div class="circle"></div> -->
+                        <!-- <span  style="color: #651068;margin: 3px" class="arrow fa fa-angle-down"></span> -->
+                    </div>
+                    </div>
+
+			<menu class="menu"   [ngClass]="{'fullscreen-inActive':state}">
+
+                <app-side-nav-menu  ></app-side-nav-menu>
+				<!-- <div class="separator"></div>
+
+				<ul class="no-bullets">
+					<li><a href="#">Latest news</a></li>
+					<li><a href="#">Critic reviews</a></li>
+					<li><a href="#">Box office</a></li>
+					<li><a href="#">Top 250</a></li>
+				</ul>
+
+				<div class="separator"></div> -->
+			</menu>
+		</aside>
+
+
+		<div class="main" role="main "  [ngClass]="{'bigMain':(mymenuState==='out')}"  >
+
+			<div class="top-bar" >
+                <i *ngIf="showSideBarIcon"    style="margin-top: 0px; margin-right: 5px;  float: right" (click)="changeStateSideBar(false)" class="fa fa-2x   fa-bars changeCursor"></i>
+
+
+				<img class="top-menu" style="width: 100%;height:220%" [ngClass]="{'fullscreen-inActive':state}" src="../../../assets/image/web-page-header-design_201166.png" alt="" class="cover" />
+              <!-- <ul   class="top-menu"  [ngClass]="{'fullscreen-inActive':state}" *ngFor="let cat of categories; let i = index" >
+
+
+                        <li  (click)="onNavigate(cat)"><a href="#/{{cat.path}}">{{cat?.name}}</a></li>
+
+                    </ul> -->
+
+
+
+
+
+			</div> <!-- top bar -->
+
+
+			<div class="featured-movie" >
+				<!-- <img class="cover" src=" https://www.logolynx.com/images/logolynx/8f/8faf557c81d11035bb0e0e80b36451a0.jpeg" alt="" class="cover" /> -->
+
+				<!-- <img class="cover" [ngClass]="{'fullscreen-inActive':state}" src="../../../assets/image/web-page-header-design_201166.png" alt="" class="cover" /> -->
+                <!-- <p class="corner-title">مدیریت تضامین</p> -->
+
+			</div> <!-- featured -->
+
+
+			<div class="movie-list" style="margin-top: 110px">
+
+
+
+                <!-- <div class="title-bar">
+					<div class="left">
+						<p class="bold">هرچی بنویسی چپ میشه</p>
+						<p class="grey">Action / Adventure</p>
+                    </div>
+					<div class="right">
+                            <p class="bold">هرچی بنویسی راست میشه</p>
+
+                    </div>
+				</div>   -->
+
+                <div  style="height: 760px !important">
+                <router-outlet >
+                </router-outlet>
+            </div>
+			</div> <!-- movie list -->
+
+
+		</div> <!-- main -->
+
+	</div> <!-- window -->
+</div> <!-- window margin -->

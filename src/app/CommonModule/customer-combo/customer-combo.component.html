@@ -1,0 +1,19 @@
+<kendo-combobox
+    [data]="dataCustomers"
+    [textField]="'name'"
+    [valueField]="'customerId'"
+    [filterable]="true"
+    [(ngModel)]="value"
+    name="displayName"
+    [disabled]=disabled
+    (filterChange)="handleFilterCustomers($event)"
+    [placeholder]="'نام مشتری'"
+>
+
+
+
+<ng-template kendoComboBoxFooterTemplate>
+    <h4 class="changeStyleTota myOrginalFont" >{{dataCustomers.length}} قابل انتخاب</h4>
+</ng-template>
+
+</kendo-combobox>

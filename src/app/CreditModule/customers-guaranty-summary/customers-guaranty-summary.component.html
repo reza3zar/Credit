@@ -1,0 +1,172 @@
+
+
+<kendo-grid [data]="gridData"   [resizable]="true" [sortable]="{ mode: 'multiple' }"
+[selectable]="{ mode: 'single'}" (selectionChange)="selected($event)" (sortChange)="sortChange($event)"
+[sortable]="{
+allowUnsort: true,
+mode: 'multiple'
+}" [sort]="sort" [pageSize]="pageSize" [skip]="skip"
+[columnMenu]="true"
+[filterable]="true"
+filterable="menu"
+[pageable]="true" [filter]="filter" (filterChange)="filterChange($event)" [filterable]="true" (pageChange)="pageChange($event)"
+[height]="700">
+
+<ng-template kendoGridToolbarTemplate>
+
+    <button (click)="showCreditDetails()" [disabled]="disableShowBtn" kendoButton  type="button">نمایش
+        جزئیات</button>
+
+    <button type="button" kendoButton   kendoGridExcelCommand style="margin-left: 2px;margin-right: 2px">خروجی
+        به اکسل</button>
+        <button (click)="refresh()" kendoButton type="button">
+            به روز رسانی
+        </button>
+</ng-template>
+
+<kendo-grid-messages
+noRecords="رکوردی برای نمایش یافت نشد!"
+pagerItems="کل رکورد"
+pagerOf ="از"
+sortAscending="صعودی"
+sortDescending="نزولی"
+filter="جستجو"
+columns="انتخاب سر ستون"
+columnsApply="اعمال"
+columnsReset="باز نشانی"
+
+pagerItemsPerPage="تعداد نمایش "
+filterClearButton="پاک کن"
+filterFilterButton ="جستجو"
+filterEqOperator="برابر با"
+filterGtOperator="بزرگتر از"
+filterGteOperator="بزرگتر مساوی با"
+filterContainsOperator="شامل"
+filterOrLogic="یا"
+filterAndLogic="و"
+>
+</kendo-grid-messages>
+
+
+
+<kendo-grid-column field="customerId" title="شناسه مشتری" [filterable]="true">
+</kendo-grid-column>
+<kendo-grid-column field="customerName" title="نام مشتری"  [filterable]="true">
+</kendo-grid-column>
+
+
+<kendo-grid-column title="اعتبار مشتری" field="credit" [filterable]="true"  filter="numeric" format= "{0:n}">
+    <ng-template kendoGridCellTemplate let-dataItem  >
+        <span >
+                {{dataItem.credit | number}}
+        </span>
+    </ng-template>
+</kendo-grid-column>
+
+
+<kendo-grid-column field="letterCreditString" title="اعتبار نامه بالاسری مشتری"  [filterable]="true"  >
+</kendo-grid-column>
+<kendo-grid-column title="اعتبار مشتری" field="credit" [filterable]="true"  filter="numeric" format= "{0:n}">
+    <ng-template kendoGridCellTemplate let-dataItem  >
+        <span >
+                {{dataItem.credit | number}}
+        </span>
+    </ng-template>
+</kendo-grid-column>
+
+
+
+<kendo-grid-column title="مانده اعتبار مشتری" field="customerResidualCredit"  [filterable]="true"  filter="numeric" format= "{0:n}">
+    <ng-template kendoGridCellTemplate let-dataItem  >
+        <span >
+                {{dataItem.customerResidualCredit | number}}
+        </span>
+    </ng-template>
+</kendo-grid-column>
+
+<kendo-grid-column title="مانده اعتبار نامه بالاسری"   field="letterResidualCreditString">
+    <ng-template kendoGridCellTemplate let-dataItem  >
+        <span >
+                {{dataItem.letterResidualCreditString  }}
+        </span>
+    </ng-template>
+</kendo-grid-column>
+
+<kendo-grid-column field="totalRequiredGuarantee" title="مجموع بلوکه " [filterable]="true"  filter="numeric" format= "{0:n}">
+        <ng-template kendoGridCellTemplate let-dataItem  >
+            <span >
+                    {{dataItem.totalRequiredGuarantee | number}}
+            </span>
+        </ng-template>
+    </kendo-grid-column>
+
+
+<kendo-grid-column title="سهم اعتبارات مشتری"     field="customerShare"  [filterable]="true"  filter="numeric" format= "{0:n}">
+    <ng-template kendoGridCellTemplate let-dataItem  >
+        <span >
+                {{dataItem.customerShare | number}}
+        </span>
+    </ng-template>
+</kendo-grid-column>
+
+
+
+<kendo-grid-column title="سهم اعتبارات کارگزاری"      field="brokerShare"  [filterable]="true"  filter="numeric" format= "{0:n}">
+    <ng-template kendoGridCellTemplate let-dataItem  >
+        <span >
+                {{dataItem.brokerShare | number}}
+        </span>
+    </ng-template>
+</kendo-grid-column>
+
+
+
+
+<kendo-grid-column     field="letterShare"  title="سهم نامــه بالاسری"    [filterable]="true"  filter="numeric" format= "{0:n}">
+    <ng-template kendoGridCellTemplate let-dataItem  >
+        <span >
+                {{dataItem.letterShare | number}}
+        </span>
+    </ng-template>
+</kendo-grid-column>
+
+
+
+<kendo-grid-column field="shortage" title="کســـــری"   [filterable]="true"  filter="numeric" format= "{0:n}">
+
+    <ng-template kendoGridCellTemplate let-dataItem  >
+        <span >
+                {{dataItem.shortage | number}}
+        </span>
+    </ng-template>
+    <ng-template
+    kendoPagerTemplate
+    let-totalPages="totalPages"
+    let-currentPage="currentPage"
+>
+    <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+    <kendo-pager-numeric-buttons
+        [buttonCount]="12"
+    ></kendo-pager-numeric-buttons>
+    <kendo-pager-info></kendo-pager-info>
+    <kendo-pager-next-buttons></kendo-pager-next-buttons>
+    <kendo-pager-page-sizes
+        [pageSizes]="[12, 120, 240]"
+    ></kendo-pager-page-sizes>
+</ng-template>
+</kendo-grid-column>
+
+
+<div *kendoGridDetailTemplate="let dataItem">
+    <app-customers-guaranteed-orders [customerId]="dataItem.customerId"></app-customers-guaranteed-orders>
+</div>
+
+<!-- <kendo-contextmenu #gridmenu [items]="items" (select)="onSelect($event)">
+</kendo-contextmenu>  -->
+
+<kendo-grid-excel fileName="credits.xlsx" [fetchData]="allData"></kendo-grid-excel>
+</kendo-grid>
+
+
+
+<div *ngIf="loadingGrid" class="k-i-loading"></div>

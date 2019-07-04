@@ -1,0 +1,750 @@
+<app-slid-in-out
+    *ngIf="typeOpereation === 'new'"
+    class="popup"
+    [bgColour]="mybg"
+>
+    <app-credits-filter
+        *ngIf="typeOpereation === 'new'"
+        (formClosed)="onSideBarClosedOccured()"
+        (refreshOccured)="onRefreshOccured($event)"
+        style="height: 100px; width: 100px"
+        [creditOption]="creditOptin"
+        [creditItemDetail]="selectedCreditItemResult"
+        [panelType]="panelTypeEnum"
+    >
+    </app-credits-filter>
+</app-slid-in-out>
+
+<app-slid-in-out
+    *ngIf="typeOpereation === 'showDetail'"
+    class="popup"
+    [bgColour]="mybg"
+>
+    <app-credits-filter
+        *ngIf="typeOpereation === 'showDetail'"
+        (formClosed)="onSideBarClosedOccured()"
+        (refreshOccured)="onRefreshOccured($event)"
+        style="height: 100px; width: 100px"
+        [creditOption]="creditOptin"
+        [creditItemDetail]="selectedCreditItemResult"
+        [panelType]="panelTypeEnum"
+    >
+    </app-credits-filter>
+</app-slid-in-out>
+
+<app-slid-in-out
+    *ngIf="typeOpereation === 'addNewCredit'"
+    class="popup"
+    [bgColour]="mybg"
+>
+    <app-credit
+        *ngIf="typeOpereation === 'addNewCredit'"
+        (formClosed)="onSideBarClosedOccured()"
+        (refreshOccured)="onRefreshOccured($event)"
+        (addNewCreditOccourd)="onRefreshOccured($event)"
+        style="height: 100px; width: 100px"
+    >
+    </app-credit>
+</app-slid-in-out>
+
+<div [ngClass]="{ 'fullscreen-inActive': state }">
+    <div class="radio-tile-group">
+        <div class="input-container">
+            <input
+                id="walk"
+                class="radio-button"
+                [checked]="this.creditType === 'hasDeadline'"
+                (click)="changeOrdersOptions('hasDeadline')"
+                type="radio"
+                name="radio"
+            />
+            <div class="radio-tile">
+                <div class="icon walk-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                        <path
+                            d="M18 7l-1.41-1.41-6.34 6.34 1.41 1.41L18 7zm4.24-1.41L11.66 16.17 7.48 12l-1.41 1.41L11.66 19l12-12-1.42-1.41zM.41 13.41L6 19l1.41-1.41L1.83 12 .41 13.41z"
+                        />
+                    </svg>
+                </div>
+                <label for="walk" class="radio-tile-label"
+                    >دارای مهلت سررسید</label
+                >
+            </div>
+        </div>
+
+        <div class="input-container">
+            <input
+                id="bike"
+                class="radio-button"
+                [checked]="this.creditType === 'threshold'"
+                (click)="changeOrdersOptions('threshold')"
+                type="radio"
+                name="radio"
+            />
+            <div class="radio-tile">
+                <div class="icon bike-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                        <path
+                            d="M22 5.72l-4.6-3.86-1.29 1.53 4.6 3.86L22 5.72zM7.88 3.39L6.6 1.86 2 5.71l1.29 1.53 4.59-3.85zM12.5 8H11v6l4.75 2.85.75-1.23-4-2.37V8zM12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"
+                        />
+                    </svg>
+                </div>
+                <label for="bike" class="radio-tile-label">
+                    در آستانه سررسید</label
+                >
+            </div>
+        </div>
+
+        <div class="input-container">
+            <input
+                id="drive"
+                class="radio-button"
+                [checked]="this.creditType === 'deActive'"
+                (click)="changeOrdersOptions('deActive')"
+                type="radio"
+                name="radio"
+            />
+            <div class="radio-tile">
+                <div class="icon car-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                        <path
+                            d="M14.59 8L12 10.59 9.41 8 8 9.41 10.59 12 8 14.59 9.41 16 12 13.41 14.59 16 16 14.59 13.41 12 16 9.41 14.59 8zM12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+                        />
+                    </svg>
+                </div>
+                <label for="drive" class="radio-tile-label">غیرفعال</label>
+            </div>
+        </div>
+
+        <div class="input-container">
+            <input
+                id="fly"
+                class="radio-button"
+                [checked]="this.creditType === 'allCredit'"
+                (click)="changeOrdersOptions('allCredit')"
+                type="radio"
+                name="radio"
+            />
+            <div class="radio-tile">
+                <div class="icon fly-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                        <path
+                            d="M14 10H2v2h12v-2zm0-4H2v2h12V6zM2 16h8v-2H2v2zm19.5-4.5L23 13l-6.99 7-4.51-4.5L13 14l3.01 3 5.49-5.5z"
+                        />
+                    </svg>
+                </div>
+                <label for="fly" class="radio-tile-label">تمامی تضامین</label>
+            </div>
+        </div>
+    </div>
+
+    <kendo-grid
+        [data]="gridData"
+        [resizable]="true"
+        [sortable]="{ mode: 'single' }"
+        [selectable]="{ mode: 'single' }"
+        (selectionChange)="selected($event)"
+        (sortChange)="sortChange($event)"
+        [sortable]="{
+            allowUnsort: true,
+            mode: 'single'
+        }"
+        [sort]="sort"
+        [navigable]="true"
+        [columnMenu]="{ columnChooser: false }"
+        [pageSize]="pageSize"
+        [skip]="skip"
+        [pageable]="true"
+        [filter]="filter"
+        filterable="menu"
+        (filterChange)="filterChange($event)"
+        [filterable]="true"
+        (pageChange)="pageChange($event)"
+        [height]="646"
+    >
+        <ng-template kendoGridToolbarTemplate>
+            <kendo-grid-column-chooser
+                style="float:left;"
+            ></kendo-grid-column-chooser>
+
+            <button (click)="createNewCredit()" kendoButton type="button">
+                ایجاد
+            </button>
+
+            <button
+                (click)="showCreditDetails()"
+                [disabled]="disableShowBtn"
+                kendoButton
+                type="button"
+            >
+                نمایش جزئیات
+            </button>
+            <button
+                (click)="openNew()"
+                [disabled]="disableBtn"
+                kendoButton
+                type="button"
+            >
+                جستجوی پیشرفته
+            </button>
+            <button
+                type="button"
+                kendoButton
+                kendoGridExcelCommand
+                style="margin-left: 2px;margin-right: 2px"
+            >
+                خروجی به اکسل
+            </button>
+
+            <button (click)="refresh()" kendoButton type="button">
+                به روز رسانی
+            </button>
+        </ng-template>
+
+        <kendo-grid-messages
+        noRecords="رکوردی برای نمایش یافت نشد!"
+        pagerItems="کل رکورد"
+        pagerOf ="از"
+        sortAscending="صعودی"
+        sortDescending="نزولی"
+        filter="جستجو"
+        columns="انتخاب سر ستون"
+        columnsApply="اعمال"
+        columnsReset="باز نشانی"
+
+        pagerItemsPerPage="تعداد نمایش "
+        filterClearButton="پاک کن"
+        filterFilterButton ="جستجو"
+        filterEqOperator="برابر با"
+        filterGtOperator="بزرگتر از"
+        filterGteOperator="بزرگتر مساوی با"
+        filterContainsOperator="شامل"
+        filterOrLogic="یا"
+        filterAndLogic="و"
+        >
+        </kendo-grid-messages>
+        <!-- filter="numeric" format= "{0:n}" -->
+
+        <!-- <kendo-grid-column field="شناسه" >
+            <ng-template kendoGridCellTemplate let-dataItem  >
+                <span  [style.color]="dataItem.colorString">
+                        {{dataItem.id }}
+                </span>
+            </ng-template>
+        </kendo-grid-column> -->
+
+        <kendo-grid-column field="عملیات" width="215" [filterable]="false">
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <div class="row" style="margin-right: 1px " kendoTooltip>
+                    <button
+                        title="نمایش جزئیات"
+                        type="button"
+                        (click)="showCreditDetails()"
+                        [disabled]="checkIsSelectedRow(dataItem.id)"
+                        class="btn btn-primary  btn-circle"
+                    >
+                        <i class="fa fa-ellipsis-h"></i>
+                    </button>
+
+                    <button
+                        title="بررسی امکان آزاد سازی"
+                        type="button"
+                        class="myOrginalFont btn btn-default btn-circle"
+                        (click)="releaseCheck()"
+                        [disabled]="checkIsSelectedRow(dataItem.id)"
+                    >
+                        <i class="fa fa-question"></i>
+                    </button>
+
+                    <button
+                        title="تمدید ضمانت"
+                        type="button"
+                        class="btn btn-success btn-circle "
+                        (click)="extendCredit($event)"
+                        [disabled]="checkIsSelectedRow(dataItem.id)"
+                    >
+                        <i class="fa fa-handshake-o"></i>
+                    </button>
+
+                    <button
+                        title="ابطال ضمانت"
+                        type="button"
+                        class="myOrginalFont btn btn-warning btn-circle"
+                        (click)="revokeCredit()"
+                        [disabled]="checkIsSelectedRow(dataItem.id)"
+                    >
+                        <i class="fa fa-gavel"></i>
+                    </button>
+
+                    <button
+                        title="غیرفعال سازی ضمانت"
+                        type="button"
+                        (click)="open()"
+                        class="btn btn-danger  btn-circle"
+                        [disabled]="checkIsSelectedRow(dataItem.id)"
+                    >
+                        <i class="fa fa-calendar-times-o"></i>
+                    </button>
+
+                    <button
+                        title="فعال سازی ضمانت"
+                        type="button"
+                        (click)="openActivateCredit()"
+                        class="btn btn-success  btn-circle"
+                        [disabled]="checkIsSelectedRow(dataItem.id)"
+                    >
+                        <i class="fa fa-check"></i>
+                    </button>
+                </div>
+
+                <ng-template
+                    kendoPagerTemplate
+                    let-totalPages="totalPages"
+                    let-currentPage="currentPage"
+                >
+                    <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+                    <kendo-pager-numeric-buttons
+                        [buttonCount]="12"
+                    ></kendo-pager-numeric-buttons>
+                    <kendo-pager-info></kendo-pager-info>
+                    <kendo-pager-next-buttons></kendo-pager-next-buttons>
+                    <kendo-pager-page-sizes
+                        [pageSizes]="[12, 120, 240]"
+                    ></kendo-pager-page-sizes>
+                </ng-template>
+            </ng-template>
+        </kendo-grid-column>
+
+        <kendo-grid-column
+            title=" شناسه "
+            field="id"
+            [filterable]="true"
+            width="150"
+            filter="numeric"
+        >
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <span [style.color]="dataItem.colorString">
+                    {{ dataItem.id }}
+                </span>
+            </ng-template>
+        </kendo-grid-column>
+
+        <kendo-grid-column title="شماره" field="creditNumber" width="180">
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <span [style.color]="dataItem.colorString">
+                    {{ dataItem.creditNumber }}
+                </span>
+            </ng-template>
+        </kendo-grid-column>
+
+        <kendo-grid-column title="تضمین دهنده" [width]="270" field="principal">
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <span [style.color]="dataItem.colorString">
+                    {{ dataItem.principal }}
+                </span>
+            </ng-template>
+        </kendo-grid-column>
+
+        <!-- <kendo-grid-column title="مبلغ"  field="value" filter="numeric" format= "{0:n}">
+            <ng-template
+
+            kendoGridCellTemplate let-dataItem  >
+                <span [style.color]="dataItem.colorString">
+                        {{dataItem.value | number}}
+                </span>
+            </ng-template>
+        </kendo-grid-column> -->
+
+        <kendo-grid-column
+            field="value"
+            title="مبلغ"
+            width="220"
+            [filterable]="true"
+            filter="numeric"
+            format="{0:n}"
+        >
+
+
+
+
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <span [style.color]="dataItem.colorString">
+                {{ dataItem.value | number }}
+            </span>
+        </ng-template>
+            <ng-template
+                *ngIf="total.value != undefined"
+                kendoGridFooterTemplate
+                let-column="column"
+                >
+
+
+                مجموع {{ column.title }}:
+                {{ total["value"].sum | number }}</ng-template
+            >
+        </kendo-grid-column>
+
+        <!-- <kendo-grid-column title="مبلغ" field="value" [filterable]="true"  filter="numeric" format= "{0:n}">
+            <ng-template
+            kendoGridGroupFooterTemplate
+                let-group="group"
+                let-aggregates>Sum: {{aggregates["value"].sum}}</ng-template>
+
+
+        </kendo-grid-column> -->
+
+        <kendo-grid-column title="نوع ضمانت" field="typeString" width="140">
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <span [style.color]="dataItem.colorString">
+                    {{ dataItem.typeString }}
+                </span>
+            </ng-template>
+        </kendo-grid-column>
+
+        <kendo-grid-column title="وضعیت " field="statusString" width="120">
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <span [style.color]="dataItem.colorString">
+                    {{ dataItem.statusString }}
+                </span>
+            </ng-template>
+        </kendo-grid-column>
+
+        <!-- <kendo-grid-column field="بانک"  >
+                <ng-template kendoGridCellTemplate let-dataItem  >
+                    <span [style.color]="dataItem.colorString">
+                            {{dataItem.bank.name }}
+                    </span>
+                </ng-template>
+            </kendo-grid-column> -->
+
+        <kendo-grid-column
+            title="تاریخ صدور"
+            field="issueDateString"
+            width="140"
+        >
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <span [style.color]="dataItem.colorString">
+                    {{ dataItem.issueDateString }}
+                </span>
+            </ng-template>
+        </kendo-grid-column>
+
+        <kendo-grid-column
+            title="تاریخ سررسید"
+            field="dueDateString"
+            width="140"
+        >
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <span [style.color]="dataItem.colorString">
+                    {{ dataItem.dueDateString }}
+                </span>
+            </ng-template>
+        </kendo-grid-column>
+
+        <kendo-grid-column title="کاربر ثبت کننده" field="creator" width="160">
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <span [style.color]="dataItem.colorString">
+                    {{ dataItem.creator }}
+                </span>
+            </ng-template>
+        </kendo-grid-column>
+
+        <kendo-grid-column title="دسته بندی " field="category.name" width="170">
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <span [style.color]="dataItem.colorString">
+                    {{ dataItem.category.name }}
+                </span>
+            </ng-template>
+        </kendo-grid-column>
+
+        <kendo-grid-column title="بانـــک " field="bank.name" width="120">
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <span [style.color]="dataItem.colorString">
+                    {{ dataItem.bank.name }}
+                </span>
+            </ng-template>
+        </kendo-grid-column>
+
+        <kendo-grid-column title="شعبه" field="branchName" width="130">
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <span [style.color]="dataItem.colorString">
+                    {{ dataItem.branchName }}
+                </span>
+            </ng-template>
+        </kendo-grid-column>
+
+        <!-- <kendo-grid-column title="شرح" field='description' width="70">
+                <ng-template kendoGridCellTemplate let-dataItem  >
+                    <span [style.color]="dataItem.colorString">
+                            {{dataItem.description }}
+                    </span>
+                </ng-template>
+            </kendo-grid-column> -->
+
+        <div *kendoGridDetailTemplate="let dataItem">
+            <app-credit-extension-details
+                [creditId]="dataItem.id"
+            ></app-credit-extension-details>
+        </div>
+
+        <!-- <kendo-contextmenu #gridmenu [items]="items" (select)="onSelect($event)">
+        </kendo-contextmenu>  -->
+
+        <kendo-grid-excel
+            fileName="credits.xlsx"
+            [fetchData]="allData"
+        ></kendo-grid-excel>
+    </kendo-grid>
+    <!--
+    <app-grid-context-menu [for]="grid" [menuItems]="['Move Up', 'Move Down']" (select)="onSelect($event)">
+    </app-grid-context-menu> -->
+
+    <div *ngIf="loadingGrid" class="k-i-loading"></div>
+
+    <div class="example-wrapper">
+        <kendo-dialog
+            title="فرم تــــاییدیه"
+            *ngIf="opened"
+            (close)="deActive('no')"
+            [minWidth]="250"
+            [width]="450"
+        >
+            <p style="margin: 20px; text-align: center;">
+                آیا از غیر فعال شدن ضمانت اطمینان دارید؟
+            </p>
+
+            <div class="">
+                <span>توضیحات</span>
+                <textarea
+                    class="col-lg-12"
+                    placeholder="توضیحات"
+                    [(ngModel)]="deActiveDescription"
+                ></textarea>
+            </div>
+
+            <kendo-dialog-actions>
+                <button kendoButton (click)="deActive('no')" primary="true">
+                    خیر
+                </button>
+                <button kendoButton (click)="deActive('yes')">بلی</button>
+            </kendo-dialog-actions>
+        </kendo-dialog>
+    </div>
+
+    <div class="example-wrapper">
+        <kendo-dialog
+            title="فرم تــــاییدیه"
+            *ngIf="openedActivate"
+            (close)="activateCredit('no')"
+            [minWidth]="250"
+            [width]="450"
+        >
+            <p style="margin: 30px; text-align: center;">
+                آیا از فعال شدن ضمانت اطمینان دارید؟
+            </p>
+
+            <div class="">
+                <span>توضیحات</span>
+                <textarea
+                    class="col-lg-12"
+                    placeholder="توضیحات"
+                    [(ngModel)]="activeDescription"
+                ></textarea>
+            </div>
+
+            <kendo-dialog-actions>
+                <button
+                    kendoButton
+                    (click)="activateCredit('no')"
+                    primary="true"
+                >
+                    خیر
+                </button>
+                <button kendoButton (click)="activateCredit('yes')">بلی</button>
+            </kendo-dialog-actions>
+        </kendo-dialog>
+    </div>
+
+    <kendo-window
+        title="تمدید ضمانت"
+        *ngIf="openedExtendCredit"
+        (close)="closeExtend()"
+        [minWidth]="250"
+        [height]="450"
+        [width]="450"
+    >
+        <form [formGroup]="requestForm" class="k-form">
+            <fieldset>
+                <label class="" style="color: slategray">
+                    <span>شماره اعتبار:</span>
+                    {{ this.selectedCreditItemResult.creditNumber }}
+                </label>
+                <label class="" style="color: slategray">
+                    <span>تاریخ سررسید فعلی:</span>
+                    {{ this.selectedCreditItemResult.dueDateString }}
+                </label>
+
+                <label class="k-form-field">
+                    <span class="text-right">تاریخ سر رسید جدید:</span>
+                    <div class="input-group">
+                        <dp-date-picker
+                            class="k-textbox"
+                            dir="rtl"
+                            mode="day"
+                            required="false"
+                            formControlName="newDueTime"
+                            [(ngModel)]="extendata.dueDateMoment"
+                            placeholder="تاریخ جدید سر رسید"
+                            theme="dp-material"
+                            required
+                        >
+                        </dp-date-picker>
+                    </div>
+
+                    <div
+                        *ngIf="submitted && ctrl.newDueTime.errors"
+                        class="invalid-feedback"
+                    >
+                        <div
+                            *ngIf="submitted && ctrl.newDueTime.errors.required"
+                            class="fontColorError"
+                        >
+                            فیلد تاریخ جدید سر رسید الزامی است
+                        </div>
+                    </div>
+                </label>
+
+                <label class="k-form-field">
+                    <span class="text-right">شماره نامه</span>
+                    <input
+                        class="k-textbox"
+                        [(ngModel)]="extendata.letterNo"
+                        formControlName="creditId"
+                        placeholder="شماره نامه"
+                    />
+                </label>
+
+                <label class="k-form-field">
+                    <span class="text-right">توضیحات</span>
+                    <input
+                        class="k-textbox"
+                        [(ngModel)]="extendata.description"
+                        formControlName="description"
+                        placeholder="توضیحات"
+                    />
+                </label>
+            </fieldset>
+
+            <div class="text-right">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-xs-6 col-md-6">
+                        <a
+                            (click)="onSubmit()"
+                            [ngClass]="{ 'm-progress': sendDataToServerExtend }"
+                            class="btn btn-success btn-block btn-lg"
+                            >تمدید</a
+                        >
+                    </div>
+                    <div class="col-xs-6 col-md-6">
+                        <a
+                            (click)="closeExtend()"
+                            class="btn btn-danger btn-block btn-lg"
+                            >انصراف</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </form>
+    </kendo-window>
+
+    <kendo-window
+        title="ابطال کردن "
+        *ngIf="openedExtendRevokeCredit"
+        (close)="closeExtend2()"
+        [minWidth]="250"
+        [height]="450"
+        [width]="450"
+    >
+        <form class="k-form" [formGroup]="requestRevokeForm">
+            <fieldset>
+                <label class="" style="color: slategray">
+                    <span>شماره اعتبار:</span>
+                    {{ this.selectedCreditItemResult.creditNumber }}
+                </label>
+                <br />
+
+                <label class="k-form-field">
+                    <span class="text-right">علت ابطال :</span>
+                    <app-revoke-combox
+                        [(ngModel)]="revoke.ReasonObject"
+                        required
+                        formControlName="reason"
+                    ></app-revoke-combox>
+
+                    <!--
+                <div
+                *ngIf="submitted2 && this.revoke.ReasonObject.id"
+                class="invalid-feedback"
+            >
+                <div
+                    *ngIf="this.revoke.ReasonObject.id"
+                    class="fontColorError"
+                >
+                    فیلد علت ابطال الزامی است
+                </div>
+            </div> -->
+                </label>
+
+                <div class="funkyradio">
+                    <div class="funkyradio-primary">
+                        <input
+                            type="checkbox"
+                            [(ngModel)]="revoke.forceStatus"
+                            formControlName="forces"
+                            name="checkbox"
+                            id="checkbox2"
+                        />
+                        <label for="checkbox2">اعمال اجبار</label>
+                    </div>
+                </div>
+
+                <label class="k-form-field">
+                    <span class="text-right">توضیحات</span>
+                    <input
+                        class="k-textbox"
+                        [(ngModel)]="revoke.Description"
+                        formControlName="description"
+                        placeholder="توضیحات"
+                    />
+                </label>
+            </fieldset>
+
+            <div class="text-right">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-xs-6 col-md-6">
+                        <button
+                            (click)="onSubmit2()"
+                            [ngClass]="{ 'm-progress': sendDataToServerLoader }"
+                            class="btn btn-success btn-block btn-lg"
+                        >
+                            ابطال
+                        </button>
+                    </div>
+                    <div class="col-xs-6 col-md-6">
+                        <a
+                            (click)="closeExtend2()"
+                            class="btn btn-danger btn-block btn-lg"
+                            >انصراف</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </form>
+    </kendo-window>
+</div>
+
+<!-- <div class="col-12"   >
+    <div class="loading">
+      <div class="js-loading-indicator triple"></div>
+    </div>
+  </div> -->

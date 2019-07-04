@@ -1,0 +1,161 @@
+<div
+    class="example-wrapper container-fluid screen-Active"
+    style="height: 100%; width: 100%;padding-left: 0px;padding-right: 0px"
+>
+    <div
+        class="row"
+        class="screen-Active"
+        style="height: 100%; width: 100%;margin: 0"
+    >
+        <div class="col-xs-12 col-sm-12 example-col" class="panelbar-wrapper">
+            <app-close-side-nav></app-close-side-nav>
+            <kendo-tabstrip
+                style="margin-top: 4px;margin-bottom: 2px;margin-left: 35px;margin-right: 6px"
+            >
+                <kendo-tabstrip-tab
+                    [title]="'ایجاد اعتبار جدید'"
+                    [selected]="true"
+                >
+                    <ng-template kendoTabContent>
+                        <div
+                            class="panel panel-default credit-card-box"
+                            style="margin-top: 4px;margin-bottom: 2px;margin-left: 5px;margin-right: 6px;  overflow: hidden;"
+                        >
+                            <div class="panel-heading  ">
+                                <div class="row display-tr">
+                                    <h3 class="panel-title display-tdhead">
+                                        ایجاد اعتبار جدیــد
+                                    </h3>
+                                    <div class="display-td"></div>
+                                </div>
+                            </div>
+                            <div class="panel-body" style="min-height: 750px;max-height: 750px" *ngIf="pageIndex==1" >
+                                <form role="form">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-xs-12 col-sm-12">
+                                                <div class="row">
+                                                        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-12">
+                                                                <input type="radio" (change)="onCreditTypeChange('Customer')"
+                                                                 [checked]="this.creditType==='Customer'"
+                                                                 name="group" id="radio1" class="k-radio" checked />
+                                                                <label class="k-radio-label" for="radio1">مشتری</label>
+                                                   </div>
+                                                   <div class="col-lg-9 col-md-9 col-xs-12 col-sm-12">
+                                                       <app-customer-combo  name="customer" [(ngModel)]="creditDecider.customer.customerId" [disabled]="!(this.creditType==='Customer')" ></app-customer-combo>
+                                                       </div>
+                                                </div>
+
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-12 col-xs-12 col-sm-12">
+                                                <div class="row">
+                                                        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-12">
+                                                        <input type="radio" [disabled]="true" (change)="onCreditTypeChange('Broker')"
+                                                        [checked]="this.creditType==='Broker'"
+                                                         name="group" class="k-radio" id="radio3" />
+                                                        <label class="k-radio-label" for="radio3">کارگزار  </label>
+                                                   </div>
+                                                   <div class="col-lg-9 col-md-9 col-xs-12 col-sm-12">
+                                                        <!-- [disabled]="!(this.creditType==='Broker')" -->
+                                                      <app-broker-combo  name="broker" [(ngModel)]="creditDecider.broker.brokerId" [disabled]="true"></app-broker-combo>
+                                                       </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <hr>
+                                    <div class="row">
+                                            <div class="col-lg-6 col-md-12 col-xs-12 col-sm-12">
+                                                          <div class="row">
+                                                                <div class="col-lg-3 col-md-3 col-xs-12 col-sm-12">
+                                                                        <label class=""   for="radiow1">نوع اعتبار </label>
+                                                           </div>
+                                                           <div class="col-lg-9 col-md-9 col-xs-12 col-sm-12">
+                                                                <app-credit-category-combo name="creditDecider" [(ngModel)]="creditDecider.category.id" ></app-credit-category-combo>
+                                                               </div>
+                                                        </div>
+                                            </div>
+
+                                            <div class="col-lg-6 col-md-12 col-xs-12 col-sm-12">
+                                                </div>
+
+
+
+                                        </div>
+                                        <br>
+                                        <hr>
+                                        <div class="row">
+                                                <div class="col-lg-3 col-md-3 col-xs-12 col-sm-12">
+                                                    <input type="radio"   (change)="changeCreditsOptions('Bond')"
+                                                    [checked]="this.creditOptionType==='Bond'"
+                                                     name="group1" class="k-radio" id="radio34" />
+                                                    <label class="k-radio-label" for="radio34">اوراق قرضه</label>
+                                                </div>
+
+                                                <div class="col-lg-3 col-md-3 col-xs-12 col-sm-12">
+                                                        <input type="radio"   (change)="changeCreditsOptions('Cash')"
+                                                        [checked]="this.creditOptionType==='Cash'"
+                                                         name="group1" class="k-radio" id="radio33" />
+                                                        <label class="k-radio-label" for="radio33">وجه نقد</label>
+                                                </div>
+
+                                                <div class="col-lg-3 col-md-3 col-xs-12 col-sm-12">
+
+                                                        <input type="radio"   (change)="changeCreditsOptions('Warranty')"
+                                                        [checked]="this.creditOptionType==='Warranty'"
+                                                         name="group1" class="k-radio" id="radio32" checked />
+                                                        <label class="k-radio-label" for="radio32">ضمانت بانکی</label>
+
+                                                </div>
+
+
+                                                <div class="col-lg-3 col-md-3 col-xs-12 col-sm-12">
+
+                                                        <input type="radio"   (change)="changeCreditsOptions('Check')"
+                                                        [checked]="this.creditOptionType==='Check'"
+                                                         name="group1" class="k-radio" id="radio31" />
+                                                        <label class="k-radio-label" for="radio31">چک</label>
+
+
+
+                                                </div>
+                                       </div>
+
+                                       <div class="row " style="min-height: 320px;">
+
+                                        </div>
+
+                                </form>
+
+                            </div>
+                            <div class="panel-body"  style="min-height: 750px;max-height: 750px" *ngIf="pageIndex==2 && creditDecider.creditType==0">
+                                <app-add-bond   [customer]="creditDecider.customer.customerId"   [category]="creditDecider.category.id" [broker]="creditDecider.broker.brokerId"></app-add-bond>
+                            </div>
+
+                            <div class="panel-body"  style="min-height: 750px;max-height: 750px" *ngIf="pageIndex==2 && creditDecider.creditType==2">
+                                    <app-add-cash   (addNewCreditOccourd)="addNewCreditOccourdFunction(true)"  [customer]="creditDecider.customer.customerId"   [category]="creditDecider.category.id" [broker]="creditDecider.broker.brokerId"></app-add-cash>
+                                </div>
+
+                                <div class="panel-body"  style="min-height: 750px;max-height: 750px" *ngIf="pageIndex==2 && creditDecider.creditType==3">
+                                        <app-add-check  [customer]="creditDecider.customer.customerId"   [category]="creditDecider.category.id" [broker]="creditDecider.broker.brokerId"></app-add-check>
+                                    </div>
+
+                                    <div class="panel-body"  style="min-height: 750px;max-height: 750px" *ngIf="pageIndex==2 &&   (creditDecider.creditType)==1">
+                                     <app-add-warranty  (addNewCreditOccourd)="addNewCreditOccourdFunction(true)"  [customer]="creditDecider.customer.customerId"   [category]="creditDecider.category.id" [broker]="creditDecider.broker.brokerId" ></app-add-warranty>
+                                   </div>
+
+                            <div class="row d-inline-flex p-3 bg-secondary ">
+                                    <div class="col-lg-2 col-md-2 col-xs-2 col-sm-2" >
+                                            <a (click)="onNextPage()" class="btn-arrow btn-arrow-right"  title="مرحله‌بعد"></a>
+                                </div>
+                                    <div class="col-lg-2 col-md-2 col-xs-2 col-sm-2"  >
+                                            <a  (click)="onPerviousPage()"  class="btn-arrow btn-arrow-left" title="مرحله‌قبل"></a>
+                                    </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </kendo-tabstrip-tab>
+            </kendo-tabstrip>
+        </div>
+    </div>
+</div>

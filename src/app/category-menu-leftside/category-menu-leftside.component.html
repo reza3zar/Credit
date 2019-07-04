@@ -1,0 +1,24 @@
+
+<div class=" box-category" *ngIf="menuIsLoad"  >
+  <ul class="elimnatemargin">
+    <div *ngFor="let cat of this.categories; let i = index" >
+      <li   *ngIf="cat?.parentId==inputParentId" id="{{cat?.id}}"   >
+        <span [class.down]="hasChildern(cat?.id)" (click)="setClickedRow(i,cat?.id)"  [class.minus]="i == selectedRow"  ></span>
+
+        <a  [class.selected]="i == selectedRow" (click)="onNavigate(cat)" href="#"  >{{cat?.name}}</a>
+
+        <ul class="childView" *ngIf="cat?.id==this.subcatId" >
+          <ng-container   *ngIf="isActive" >
+              <app-category-menu-leftside [inputParentId]="cat?.id"></app-category-menu-leftside>
+          </ng-container>
+        </ul>
+    </div>
+  </ul>
+</div>
+
+<ng-container *ngIf="!menuIsLoad &&  inputParentId==0">
+<div  *ngFor="let fake of generateFake(10)" class="card-layout">
+    <app-content-loader [numberLines]="1"></app-content-loader>
+</div>
+</ng-container>
+

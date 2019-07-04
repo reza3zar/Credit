@@ -1,0 +1,79 @@
+
+
+@font-face { font-family: 'BYekan';
+  src: url('../assets/fonts/BYekan.eot?#') format('eot'),  /* IE6–۸ */
+  url('../assets/fonts/BYekan.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+  url('../assets/fonts/BYekan.ttf') format('truetype');  /* Saf3—۵, Chrome4+, FF3.5, Opera 10+ */
+}
+
+.myOrginalFont{
+  font-family: 'BYekan';
+
+
+}
+
+div{
+  direction: ltr;
+}
+
+.progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /*background-color: rgba(239, 239, 239, 0.8);*/
+
+}
+.progress>span {
+   padding: 100px;
+   border-width: 3px;
+   animation-duration: 500ms;
+ }
+
+
+/* GENERAL STYLES AND CLASSES
+--------------------------------------------------------------------- */
+
+body ng-component {
+  display: block;
+}
+/* HEADER STYLES
+--------------------------------------------------------------------- */
+/* MAIN STYLES
+--------------------------------------------------------------------- */
+main {
+  padding: 0 20px;
+  min-height: 300px;
+  /* side form */
+}
+main .products-table {
+  margin-top: 20px;
+}
+main .products-table .delete-column {
+  width: 60px;
+}
+main .view-side-form .side-form {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  width: 80%;
+  height: 100%;
+  overflow: auto;
+  background: #fff;
+  padding: 20px;
+  border-left: 1px solid #e0e0e0;
+}
+/* FOOTER STYLES
+--------------------------------------------------------------------- */
+footer {
+  text-align: center;
+  margin-top: 20px;
+  padding: 20px;
+  border-top: 1px solid #ddd;
+}

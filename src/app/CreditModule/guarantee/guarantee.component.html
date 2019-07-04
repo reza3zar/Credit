@@ -1,0 +1,248 @@
+
+
+
+    <div class="CardLayout CardLayout--narrow">
+
+            <div class="fe-Card fe-Card--large">
+
+
+                <div class="fe-Card-segment fe-Card-segment--fullBleed">
+                  <div class="fe-MastHead fe-MastHead--purple">
+
+                  <div class="fe-MastHead-image">
+                    <img src="../../../assets/image/images.jpg">
+                </div>
+                </div>
+                </div>
+
+
+
+
+
+
+                <div class="fe-Card-segment">
+
+
+
+
+
+                  <div class="form"  >
+        <form [formGroup]="creditForm" class="top_aligned simple-form" *ngIf="!showResult"  >
+
+            <div class="row"  >
+
+
+                    <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+
+                            <div class="input-group">
+                            <span class="input-group-addon">نام مشتری</span>
+                            <app-customer-combo  formControlName="customerValue" [(ngModel)]="customer"  required  ></app-customer-combo>
+
+                        </div>
+
+                        <div *ngIf="submitted && ctrl.customerValue.errors" class="invalid-feedback">
+                               <div *ngIf="submitted && ctrl.customerValue.errors.required" class="fontColorError">فیلد مشتری الزامی است</div>
+                        </div>
+
+                  </div>
+
+
+                  <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+
+                        <div class="input-group">
+                        <span class="input-group-addon">نام کارگزار</span>
+                        <app-broker-combo  formControlName="broker" [(ngModel)]="broker"  ></app-broker-combo>
+
+                    </div>
+
+                    <div *ngIf="submitted && ctrl.broker.errors" class="invalid-feedback">
+                           <div *ngIf="submitted && ctrl.broker.errors.required" class="fontColorError">فیلد کارگزار الزامی است</div>
+                    </div>
+
+              </div>
+
+
+           </div>
+           <br>
+
+           <div class="row">
+
+            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+
+                <div class="input-group">
+                <span class="input-group-addon">نوع گارانتی</span>
+                <app-guarantee-type-combo  formControlName="gauranteeType" [(ngModel)]="guaranteeType"  required  ></app-guarantee-type-combo>
+
+            </div>
+
+            <div *ngIf="submitted && ctrl.gauranteeType.errors" class="invalid-feedback">
+                   <div *ngIf="submitted && ctrl.gauranteeType.errors.required" class="fontColorError">فیلد نوع گارانتی الزامی است</div>
+            </div>
+
+      </div>
+
+
+      <div class="col-lg-6 col-sm-12">
+
+
+                <div class="input-group">
+                        <span class="input-group-addon" >ضریب گارانتی</span>
+                            <input  type="text" formControlName="coefficient" [(ngModel)]="tempOrder.guaranteeCoefficient"
+                            required class="form-control"   />
+
+
+                    </div>
+                    <div *ngIf="submitted && ctrl.coefficient.errors" class="invalid-feedback">
+                            <div *ngIf="submitted && ctrl.coefficient.errors.required" class="fontColorError">فیلد ضریب گارانتی الزامی است</div>
+                    </div>
+            </div>
+           </div>
+           <br>
+           <div class="row">
+            <div class="col-lg-12 col-sm-12">
+
+
+                <div class="input-group">
+                        <span class="input-group-addon" >ارزش گـــارانــتی</span>
+                            <input  type="text" formControlName="value" [(ngModel)]="tempOrder.value"
+                            required class="form-control"   />
+
+
+                    </div>
+                    <div *ngIf="submitted && ctrl.value.errors" class="invalid-feedback">
+                            <div *ngIf="submitted && ctrl.value.errors.required" class="fontColorError">فیلد ارزش گارانتی الزامی است</div>
+                    </div>
+            </div>
+           </div>
+
+
+           <br>
+           <div class="row">
+
+            <div class="col-lg-6 col-sm-12">
+
+                <div class="funkyradio">
+
+                    <div class="funkyradio-primary">
+
+                        <input type="checkbox" [(ngModel)]="tempOrder.privilegedToUseBrokerCredit"
+                        formControlName="privilegedToUseBrokerCredit" name="checkbox"  id="checkbox2" />
+                        <label for='checkbox2'      > مجاز به استفاده از ا عتبار کارگزار</label>
+
+                    </div>
+
+
+                    </div>
+
+            </div>
+
+
+            <div class="col-lg-6 col-sm-12">
+                <div class="funkyradio">
+
+                    <div class="funkyradio-primary">
+
+                        <input type="checkbox" [(ngModel)]="tempOrder.privilegedToUseLetterCredit"
+                        formControlName="privilegedToUseLetterCredit" name="checkbox"  id="checkbox3" />
+                        <label for='checkbox3'      >مجاز به استفاده از ا عتبار نامه</label>
+
+                    </div>
+            </div>
+
+            </div>
+
+
+           </div>
+           <br>
+           <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                    <button
+                        (click)="inquiryGaurantee()"
+                        [ngClass]="{'m-progress':sendDataToServer}"
+                        class="btn btn-warning btn-block  btn-lg"  >شروع بررسی!</button>
+
+
+            </div>
+        </div>
+
+                    </form>
+                </div>
+
+                    <div *ngIf="showResult" >
+                        <div class="row">
+
+
+                                <div class="funkyradio" >
+
+                                        <div class="funkyradio-primary">
+
+                                            <input type="checkbox" [(ngModel)]="simulate.canGauarantee"
+                                            name="checkbox"  id="checkbox2" />
+                                            <label for='checkbox2' style="color:green" *ngIf="simulate.canGauarantee"     >  تضمین سفارش امکان پذیر است</label>
+                                            <label for='checkbox2' style="color:red" *ngIf="!simulate.canGauarantee"     >   تضمین سفارش امکان پذیر نمی باشد</label>
+
+                                        </div>
+
+
+                                        </div>
+                        </div>
+                        <br>
+
+                        <div class="row">
+
+                            <div class="col-lg-6 col-sm-12">
+                                <div class="input-group">
+                                        <span class="input-group-addon" >ســهـم مـشـتـری</span>
+                                            <input  type="text"   [(ngModel)]="simulate.guarantee.customerShare"
+                                              class="form-control"   />
+                                    </div>
+                            </div>
+
+                            <div class="col-lg-6 col-sm-12">
+                                <div class="input-group">
+                                        <span class="input-group-addon" >سهم کارگزار</span>
+                                            <input  type="text"   [(ngModel)]="simulate.guarantee.brokerShare"
+                                              class="form-control"   />
+                                    </div>
+                            </div>
+
+                        </div>
+                        <br>
+                        <div class="row">
+
+                            <div class="col-lg-6 col-sm-12">
+                                <div class="input-group">
+                                        <span class="input-group-addon" >سهم نامه بالاسری</span>
+                                            <input  type="text"   [(ngModel)]="simulate.guarantee.letterShare"
+                                              class="form-control"   />
+                                    </div>
+                            </div>
+
+                            <div class="col-lg-6 col-sm-12">
+                                <div class="input-group">
+                                        <span class="input-group-addon" > کــــســــری  </span>
+                                            <input  type="text"   [(ngModel)]="simulate.guarantee.shortage"
+                                              class="form-control"   />
+                                    </div>
+                            </div>
+
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                                    <a
+                                        (click)="backToInquiry()"
+                                        class="btn btn-success btn-block btn-lg">برگشت به قسمت استعلام گارانتی جدید</a>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+

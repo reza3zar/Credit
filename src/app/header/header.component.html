@@ -1,0 +1,69 @@
+<div id="header">
+    <nav id="top" class="htop">
+        <div class="container-fluid">
+            <div class="row">
+                <span class="drop-icon visible-sm visible-xs"
+                    ><i class="fa fa-align-justify"></i
+                ></span>
+                <div class="pull-left flip left-top">
+                    <div class="links">
+                        <ul>
+                            <li class="mobile">
+                                <i class="fa fa-phone" ></i>+98 88560001 تماس با ما
+                            </li>
+                            <li class="email">
+                                <a href="mailto:CMS@ime.co.ir"
+                                    ><i class="fa fa-envelope"></i
+                                    >CMS@ime.co.ir</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="top-links" class="nav pull-right flip">
+                    <ul>
+                        <!--
+                            <li *ngIf="this.userInfo">{{this.userInfo?.firstname+' '+this.userInfo?.lastname}}</li>
+                            <li *ngIf="this.userInfo"><a>خروج</a></li>
+                        -->
+                        <li   >
+                            <a (click)="logOut()" routerLink="/login">خروج</a><i class="fa fa-sign-out"></i>
+                        </li>
+                        <li><i class="fa fa-user-circle-o"></i> <a routerLink="/async">{{this.user?.displayName}}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container-fluid">
+        <nav id="menu" class="navbar">
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a class="home_link" title="خانه" routerLink="/home"
+                            ><span>Home</span></a
+                        >
+                    </li>
+                    <li class="mega-menu dropdown">
+                        <a>عملیــات کاربری</a>
+                        <div class="dropdown-menu" style="direction: rtl">
+                            <app-category-menu-top></app-category-menu-top>
+                        </div>
+                    </li>
+
+                    <li class="dropdown wrap_custom_block hidden-sm hidden-xs">
+                        <a>منو تنظیمات</a>
+                        <div class="dropdown-menu"></div>
+                    </li>
+
+                    <li class="contact-link">
+                        <a href="contact-us.html">تماس بــا ما</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="underlineCustom"></div>
+    </div>
+</div>

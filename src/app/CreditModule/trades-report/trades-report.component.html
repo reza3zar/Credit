@@ -1,0 +1,214 @@
+
+<div   class="checkout myOrginalFont">
+
+        <form class="form" autocomplete="off" novalidate>
+          <fieldset>
+                <label for="card-holder">انتخــاب مشــتری</label>
+                <app-content-loader  *ngIf="!pageloaded"   [numberLines]="1"></app-content-loader>
+                <app-customer-combo  [(ngModel)]="tradeSearch.customerId" *ngIf="pageloaded"   name="customer"     ></app-customer-combo>
+          </fieldset>
+          <fieldset>
+            <label for="card-holder">تاریخ عرضه</label>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                <app-content-loader  *ngIf="!pageloaded"   [numberLines]="1"></app-content-loader>
+
+                    <div  class="input-group">
+                            <dp-date-picker *ngIf="pageloaded"
+                            class="form-control"
+                            dir="rtl"
+                            [(ngModel)]="tradeSearch.supplyDate.fromDateMoment"
+                            formControlName="issueDate"
+                            mode="day"
+                             required
+                            placeholder="شروع"
+                            theme="dp-material"
+                        >
+                        </dp-date-picker>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div>
+                            <app-content-loader  *ngIf="!pageloaded"   [numberLines]="1"></app-content-loader>
+                            <dp-date-picker
+                            *ngIf="pageloaded"
+                            class="form-control"
+                            dir="rtl"
+                            [(ngModel)]="tradeSearch.supplyDate.toDateMoment"
+                            formControlName="issueDate"
+                            mode="day"
+                             required
+                            placeholder="پایان"
+                            theme="dp-material"
+                        >
+                        </dp-date-picker>
+                    </div>
+                </div>
+            </div>
+          </fieldset>
+
+
+          <fieldset>
+                <label for="card-holder">تاریخ تحویل</label>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                    <app-content-loader  *ngIf="!pageloaded"   [numberLines]="1"></app-content-loader>
+
+                        <div  class="input-group">
+                                <dp-date-picker
+                                [(ngModel)]="tradeSearch.deliveryDate.toDateMoment"
+
+                                *ngIf="pageloaded"
+                                class="form-control"
+                                dir="rtl"
+                                formControlName="issueDate"
+                                mode="day"
+                                 required
+                                placeholder="شروع"
+                                theme="dp-material"
+                            >
+                            </dp-date-picker>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div>
+                                <app-content-loader  *ngIf="!pageloaded"   [numberLines]="1"></app-content-loader>
+                                <dp-date-picker
+                                [(ngModel)]="tradeSearch.deliveryDate.toDateMoment"
+
+                                *ngIf="pageloaded"
+                                class="form-control"
+                                dir="rtl"
+                                formControlName="issueDate"
+                                mode="day"
+                                 required
+                                placeholder="پایان"
+                                theme="dp-material"
+                            >
+                            </dp-date-picker>
+                        </div>
+                    </div>
+                </div>
+              </fieldset>
+
+
+          <button (click)="searchCustomerTrades()"  class="btn" > جستجو
+              <i class="fa   fa-check-square-o"></i>
+            </button>
+        </form>
+</div>
+
+
+
+
+<kendo-grid *ngIf="false"
+ [data]="gridData" (cellClick)="onCellClick($event)" [resizable]="true" [sortable]="{ mode: 'multiple' }"
+[selectable]="{ mode: 'single'}" (selectionChange)="selected($event)" (sortChange)="sortChange($event)"
+[sortable]="{
+allowUnsort: true,
+mode: 'multiple'
+}" [sort]="sort"
+[columnMenu]="{ columnChooser: false }"
+[pageSize]="pageSize" [skip]="skip"
+[pageable]="true" [filter]="filter"
+ (filterChange)="filterChange($event)"
+ [filterable]="true"
+(pageChange)="pageChange($event)"
+(dataStateChange)="dataStateChange($event)"
+[height]="646">
+
+<ng-template kendoGridToolbarTemplate>
+
+        <kendo-grid-column-chooser style="float:left;"></kendo-grid-column-chooser>
+
+    <button type="button" kendoButton   kendoGridExcelCommand style="margin-left: 2px;margin-right: 2px">خروجی
+        به اکسل</button>
+        <button (click)="refresh()" kendoButton type="button">
+            به روز رسانی
+        </button>
+</ng-template>
+
+
+<kendo-grid-messages
+noRecords="رکوردی برای نمایش یافت نشد!"
+pagerItems="کل رکورد"
+pagerOf ="از"
+sortAscending="صعودی"
+sortDescending="نزولی"
+filter="جستجو"
+columns="انتخاب سر ستون"
+columnsApply="اعمال"
+columnsReset="باز نشانی"
+>
+</kendo-grid-messages>
+
+
+<kendo-grid-column field="orderId" filter="numeric"   title="شناسه سفارش"  [filterable]="true" >
+</kendo-grid-column>
+<kendo-grid-column field="customerName" title="نام مشتری"  [width]=270 [filterable]="true">
+</kendo-grid-column>
+
+
+<kendo-grid-column field="guaranteeTypeString" title="نوع ضمانت" [filterable]="true"   >
+    </kendo-grid-column>
+<kendo-grid-column field="statusString" title="وضعیت سفارش" [filterable]="true"  >
+</kendo-grid-column>
+
+<!-- <kendo-grid-column field="deliveryDateString" title=" تاریخ تحویل" [filterable]="true">
+</kendo-grid-column> -->
+
+
+
+
+<kendo-grid-column field="deliveryDateString" title="تاریخ تحویل" [filterable]="true"   >
+</kendo-grid-column>
+
+
+<kendo-grid-column title="میزان بلــوکه" field="guarantee.totalGuarantee" [filterable]="true"  filter="numeric" format= "{0:n}">
+
+</kendo-grid-column>
+
+
+<kendo-grid-column title=" سهم مشتری " field="guarantee.customerShare" [filterable]="true"  filter="numeric" format= "{0:n}">
+
+</kendo-grid-column>
+
+<kendo-grid-column title=" سهم کارگزاری " field="guarantee.brokerShare" [filterable]="true"  filter="numeric" format= "{0:n}">
+
+</kendo-grid-column>
+
+
+<kendo-grid-column title=" سهم نامه بالاسری " field="guarantee.letterShare" [filterable]="true"  filter="numeric" format= "{0:n}">
+
+</kendo-grid-column>
+
+
+<kendo-grid-column title=" کسری " field="guarantee.shortage" [filterable]="true"  filter="numeric" format= "{0:n}">
+
+</kendo-grid-column>
+
+
+
+
+
+<div *kendoGridDetailTemplate="let dataItem">
+    <app-order-details [orderId]="dataItem.orderId"></app-order-details>
+</div>
+
+
+<ng-template kendoGridDetailTemplate let-dataItem>
+        <section *ngIf="dataItem.guarantee">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12"> <p><strong>سهم مشتری:</strong> {{dataItem.guarantee.customerShare}} </p></div>
+
+          <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12"><p><strong>سهم کارگزاری:</strong> {{dataItem.guarantee.brokerShare}} </p></div>
+          <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12"><p><strong>  سهم نامه بالاسری:</strong> {{dataItem.guarantee.letterShare}} </p></div>
+          <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12"><p><strong>کسری:</strong> {{dataItem.guarantee.shortage}}</p></div>
+        </div>
+        </section>
+ </ng-template>
+
+<kendo-grid-excel fileName="credits.xlsx" [fetchData]="allData"></kendo-grid-excel>
+</kendo-grid>
