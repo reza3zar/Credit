@@ -80,7 +80,6 @@ export class LoginComponent implements OnInit ,AfterContentInit, OnDestroy {
   }
   sendDataToServer=false;
   public showErrorLogin(err: any): void {
-    //   type: 'slide', duration: 400
     this.notificationService.show({
       content:
        err
