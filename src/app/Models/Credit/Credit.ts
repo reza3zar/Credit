@@ -44,7 +44,7 @@ import { CreditHistory } from './Credithistory';
         public extensions: Array<CreditExtension>;
         public  dueDateString: string;
         public  issueDateString: string;
-
+        public  creationTimeString: string;
 
         private issueDate : Date;
         public get _issueDate() : Date {

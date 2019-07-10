@@ -417,6 +417,19 @@
                 </ng-template>
             </kendo-grid-column> -->
 
+            <kendo-grid-column
+            title="زمان ثبت"
+            field="issueDateString"
+            width="140"
+        >
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <span [style.color]="dataItem.colorString">
+                    {{ dataItem.creationTimeString }}
+                </span>
+            </ng-template>
+        </kendo-grid-column>
+
+
         <kendo-grid-column
             title="تاریخ صدور"
             field="issueDateString"
@@ -428,6 +441,8 @@
                 </span>
             </ng-template>
         </kendo-grid-column>
+
+        
 
         <kendo-grid-column
             title="تاریخ سررسید"

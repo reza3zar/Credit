@@ -29,7 +29,13 @@ columns="انتخاب سر ستون"
 <kendo-grid-column field="timeString" title="زمان"  [filterable]="false">
 </kendo-grid-column>
 
-
+<kendo-grid-column title="کاربر " field='user' width="160" [filterable]="false" >
+    <ng-template kendoGridCellTemplate let-dataItem  >
+        <span [style.color]="dataItem.colorString">
+                {{dataItem.user }}
+        </span>
+    </ng-template>
+</kendo-grid-column>
 
 
 
@@ -62,13 +68,7 @@ columns="انتخاب سر ستون"
     <kendo-grid-column field="newValues.statusString" title="وضعیت بعد" [filterable]="false">
         </kendo-grid-column>
 
-        <kendo-grid-column title="کاربر " field='user' width="160" >
-                <ng-template kendoGridCellTemplate let-dataItem  >
-                    <span [style.color]="dataItem.colorString">
-                            {{dataItem.user }}
-                    </span>
-                </ng-template>
-            </kendo-grid-column>
+
 
         <kendo-grid-column field="description" title="توضیحات" [filterable]="false">
             </kendo-grid-column>
