@@ -226,7 +226,7 @@
     </kendo-grid-column>
 
     <div *kendoGridDetailTemplate="let dataItem">
-        <app-customers-guaranteed-orders
+        <app-customers-guaranteed-orders (refresoccured)="refresh()"
             [customerId]="dataItem.customerId"
         ></app-customers-guaranteed-orders>
     </div>

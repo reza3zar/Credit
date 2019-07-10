@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { SortDescriptor, orderBy, filterBy, CompositeFilterDescriptor } from '@progress/kendo-data-query';
@@ -22,7 +22,7 @@ export class CustomersGuaranteedOrdersComponent implements OnInit, OnDestroy {
   public panelTypeEnum: string = "";
 
   @Input() customerId:number;
-
+  @Output() refresoccured: EventEmitter<void> = new EventEmitter();
   constructor(
 
     private letterService: CustomersGuaranteeSummaryServiceService,
@@ -206,6 +206,7 @@ export class CustomersGuaranteedOrdersComponent implements OnInit, OnDestroy {
     this.loadingGrid=true;
   this.orderService.synchronizeOrderByOrderId(orderId).subscribe(x=>{
     this.loadingGrid=false;
+    this.refresoccured.emit();
   } ,err => {
     this.loadingGrid=false;
     this.showError(err);
