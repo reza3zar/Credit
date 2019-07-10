@@ -123,8 +123,8 @@ export class OrdersManagementComponent implements OnInit, OnDestroy {
     this.backGroundSubscriber = this.inActiveServ.change.subscribe(myState => {
       this.state = myState;
     });
-    this.orderOptentionSelected='readytotrade';
-    this.creditServiceSubscriber = this.orderService.getReadyToTradeOrdersCollection().subscribe(
+    this.orderOptentionSelected='active';
+    this.creditServiceSubscriber = this.orderService.getActiveOrdersCollection().subscribe(
       result => {
 
 

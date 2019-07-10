@@ -19,6 +19,10 @@ export class OrdersService {
     return this.http.get<Array<Order>>(this.url.readytotrade)
   }
 
+  public getActiveOrdersCollection():Observable<Array<Order>>{
+    return this.http.get<Array<Order>>(this.url.activeOrders)
+  }
+
   public getTradedOrdersCollection():Observable<Array<Order>>{
     return this.http.get<Array<Order>>(this.url.tradedOrder)
   }
