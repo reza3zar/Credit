@@ -174,7 +174,31 @@ export class OrdersManagementComponent implements OnInit, OnDestroy {
 
         break;
 
-
+          case 'active':
+          this.loadingGrid = true;
+          this.creditServiceSubscriber = this.orderService.getActiveOrdersCollection().subscribe(
+            result => {
+    
+    
+    
+    
+              this.dataRes = (result) as Order[];
+              this.gridData.data = this.dataRes;
+              try {
+                this.gridData.total = this.dataRes.length;
+              } catch (ex) {
+                console.error(ex);
+              }
+    
+    
+              this.loadItems(this.dataRes.length);
+    
+              this.loadingGrid = false;
+            }
+          );
+    
+            break;
+    
         case 'traded':
       this.loadingGrid = true;
 

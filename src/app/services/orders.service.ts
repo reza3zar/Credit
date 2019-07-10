@@ -53,9 +53,7 @@ export class OrdersService {
   }
 
   public synchronizeOrderByOrderId(orderIdItem:number): Observable<any>{
-    // console.log(orderIdItem)
-    // var orderItems:  OrderParameter =new OrderParameter();
-    // orderItems.orderId=orderIdItem.toString();
+ 
     return this.http.post<any>(this.url.synchronizeOrderByOrderId,orderIdItem);
   }
 

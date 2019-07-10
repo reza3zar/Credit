@@ -81,6 +81,7 @@ columnsReset="باز نشانی"
 
 
 
+
 <kendo-grid-column field="کسری" [filterable]="false">
     <ng-template kendoGridCellTemplate let-dataItem  >
         <span >
@@ -90,7 +91,21 @@ columnsReset="باز نشانی"
 </kendo-grid-column>
 
 
-
+<kendo-grid-column field="عملیات" [filterable]="false">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <div class="row" style="margin-right: 1px " kendoTooltip>
+                <button
+                    title="همگام‌سازی سفارش"
+                    type="button"
+                    (click)="synchronizeByOrderId(dataItem.orderId)"
+                    [disabled]="checkIsSelectedRow(dataItem.orderId)"
+                    class="btn btn-primary  btn-circle"
+                >
+                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                </button>
+            </div>
+        </ng-template>
+    </kendo-grid-column>
 
 
 <kendo-grid-excel fileName="credits.xlsx" [fetchData]="allData"></kendo-grid-excel>

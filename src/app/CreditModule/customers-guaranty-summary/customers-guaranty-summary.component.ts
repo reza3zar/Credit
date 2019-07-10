@@ -5,6 +5,7 @@ import { ExcelExportData } from '@progress/kendo-angular-excel-export';
 import { Subscription } from 'rxjs';
 import { CustomerGuaranteeSummary } from '../../Models/Credit/CustomerGuaranteeSummary';
 import { PageChangeEvent, GridDataResult } from '@progress/kendo-angular-grid';
+ 
 
 @Component({
   selector: 'app-customers-guaranty-summary',
@@ -22,6 +23,8 @@ export class CustomersGuarantySummaryComponent implements OnInit, OnDestroy {
   constructor(
 
     private letterService: CustomersGuaranteeSummaryServiceService,
+
+
 
   ) {
     this.allData = this.allData.bind(this);
@@ -189,6 +192,21 @@ private loadItems( ): void {
 
 
 
+
+
+checkIsSelectedRow(customerId: number) {
+
+
+  if (
+    this.selectedCreditItemResult == undefined ||
+    this.selectedCreditItemResult == null
+  )
+    return true;
+
+
+  if (this.selectedCreditItemResult.customerId == customerId) return false;
+  return true;
+}
 
 
   public onSelect({ item }): void {

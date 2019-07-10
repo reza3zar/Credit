@@ -5,6 +5,8 @@ import { SortDescriptor, orderBy, filterBy, CompositeFilterDescriptor } from '@p
 import { CustomersGuaranteeSummaryServiceService } from '../../services/customers-guarantee-summary-service.service';
 import { Order } from '../../Models/Order/Order';
 import { ExcelExportData } from '@progress/kendo-angular-excel-export';
+import { OrdersService } from '../../services/orders.service';
+import { NotificationService } from '@progress/kendo-angular-notification';
 
 @Component({
   selector: 'app-customers-guaranteed-orders',
@@ -24,6 +26,8 @@ export class CustomersGuaranteedOrdersComponent implements OnInit, OnDestroy {
   constructor(
 
     private letterService: CustomersGuaranteeSummaryServiceService,
+    private orderService: OrdersService,
+    private notificationService: NotificationService
 
   ) {
     this.allData = this.allData.bind(this);
@@ -198,7 +202,40 @@ export class CustomersGuaranteedOrdersComponent implements OnInit, OnDestroy {
   public createNewCredit(): void {
   }
 
+  synchronizeByOrderId(orderId:number):void{
+    this.loadingGrid=true;
+  this.orderService.synchronizeOrderByOrderId(orderId).subscribe(x=>{
+    this.loadingGrid=false;
+  } ,err => {
+    this.loadingGrid=false;
+    this.showError(err);
+  });
+}
 
+public showError(err: any): void {
+  this.notificationService.show({
+    content: err.error.message,
+    height: 40,
+    animation: { type: "fade", duration: 1000 },
+    position: { horizontal: "center", vertical: "top" },
+    type: { style: "error", icon: true },
+    closable: true
+  });
+}
+
+checkIsSelectedRow(creditId: number) {
+
+
+  if (
+    this.selectedCreditItemResult == undefined ||
+    this.selectedCreditItemResult == null
+  )
+    return true;
+
+
+  if (this.selectedCreditItemResult.orderId == creditId) return false;
+  return true;
+}
 
 }
 
