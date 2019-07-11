@@ -1,3 +1,4 @@
+import { OrderStatus } from './../../Models/Order/OrderStatus';
 import { FormalLetter } from './../../Models/Credit/FormalLetter';
 import { LetterService } from './../../services/letter.service';
 import { OnInit, Component, OnDestroy } from "@angular/core";
@@ -23,6 +24,8 @@ import { Credit } from "../../Models/Credit/Credit";
 import { Subscription } from "rxjs";
 import { OrdersService } from '../../services/orders.service';
 import { Order } from '../../Models/Order/Order';
+import { SearchOrderDTO } from '../../Models/Order/SearchOrderDTO';
+import { flatten } from '@progress/kendo-angular-grid/dist/es2015/filtering/base-filter-cell.component';
 
 @Component({
   selector: 'app-orders-management',
@@ -32,6 +35,7 @@ import { Order } from '../../Models/Order/Order';
 export class OrdersManagementComponent implements OnInit, OnDestroy {
   public gridData: GridDataResult;
   public sort: SortDescriptor[] = [];
+  public searchDto:SearchOrderDTO=new SearchOrderDTO()
   public loadingGrid = true;
   public disableBtn = false;
   public disableShowBtn = true;
@@ -252,20 +256,20 @@ export class OrdersManagementComponent implements OnInit, OnDestroy {
         break;
     }
   }
-
-
+  totalPages=0;
   getArchivedOrders(skip,pageSize){
     this.creditServiceSubscriber = this.orderService.getArchiveOrdersCollection(skip/pageSize+1,pageSize).subscribe(
       result => {
         this.dataRes = result.items as Order[];
         this.gridData.data = this.dataRes;
+        // currentPage=skip/pageSize+1;
         try {
           this.gridData.total = result.totalCount;
+           pageSize= result.totalCount;
         } catch (ex) {
           console.error(ex);
         }
-        this.loadItems( result.totalCount);
-
+        this.loadItems(pageSize);
         this.loadingGrid = false;
       }
     );
@@ -289,7 +293,7 @@ export class OrdersManagementComponent implements OnInit, OnDestroy {
   }
 
   public pageChange(event: PageChangeEvent): void {
-
+    console.log(event)
     this.pageSize = event.take;
     // console.log('this.pageSize')
     // console.log(this.pageSize)
@@ -332,7 +336,7 @@ export class OrdersManagementComponent implements OnInit, OnDestroy {
     var resultSort2 = resultSort.slice(this.skip, this.skip + this.pageSize);
     this.gridData = {
       data: resultSort2,
-      total:resultFilter.length
+      total:totalCount
     };
   }
 
@@ -405,6 +409,12 @@ export class OrdersManagementComponent implements OnInit, OnDestroy {
   public filter: CompositeFilterDescriptor;
   public filterChange(filter: CompositeFilterDescriptor): void {
     this.filter = filter;
+   /* const root = this.filter || { logic: 'and', filters: []};
+    if(this.filter.filters.length===0)
+    console.log('Clear')
+    if(flatten(root).filter(x=>x.field==  "customerName") !=undefined && flatten(root).filter(x=>x.field==  "customerName")[0]!=undefined)
+    console.log( flatten(root).filter(x=>x.field==  "customerName")[0].value)*/
+
     this.loadAllItems();
 
   }

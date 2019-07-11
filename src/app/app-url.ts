@@ -106,6 +106,7 @@ let basUrl='http://172.16.1.36:36000';
   'readytotrade':basUrl+'/order/ready-to-trade',
   'activeOrders':basUrl+'/order/active',
 
+  'SearchableOrders':basUrl+'/order/search',
   
   'archivedOrders':basUrl+'/order/archived',
   'postExtendCredit':basUrl+'/credit/extend',

@@ -7,7 +7,7 @@
 
 
         <div class="input-container">
-                <input id="walk" class="radio-button"  [checked]="this.orderOptentionSelected==='active'" (click)="changeOrdersOptions('readytotrade')" type="radio" name="radio" />
+                <input id="walk" class="radio-button"  [checked]="this.orderOptentionSelected==='active'" (click)="changeOrdersOptions('active')" type="radio" name="radio" />
                 <div class="radio-tile">
                   <div class="icon walk-icon">
                       <svg   width="24" height="24" viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12zm-2-9H8v2h11V8zm0 4H8v2h11v-2zM7 8H5v2h2V8zm0 4H5v2h2v-2z"/></svg>
@@ -78,7 +78,7 @@ mode: 'multiple'
 (pageChange)="pageChange($event)"
 (dataStateChange)="dataStateChange($event)"
 [skip]="skip"
-[height]="646">
+[height]="696">
 
 
 <kendo-grid-messages
@@ -124,8 +124,7 @@ filterAndLogic="و"
             <kendo-pager-next-buttons></kendo-pager-next-buttons>
             <kendo-pager-page-sizes [pageSizes]="[12, 120, 240]"></kendo-pager-page-sizes>
          </ng-template> -->
-
-         <ng-template kendoPagerTemplate let-totalPages="totalPages" let-currentPage="currentPage">
+         <ng-template kendoPagerTemplate let-totalPages="pageSize" let-currentPage="2">
             <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
             <kendo-pager-numeric-buttons [buttonCount]="12"></kendo-pager-numeric-buttons>
             <kendo-pager-info></kendo-pager-info>

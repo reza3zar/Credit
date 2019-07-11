@@ -7,6 +7,7 @@ import { TemporaryOrderDTO } from '../Models/Order/TemporaryOrderDTO';
 import { SimulateGuaranteeresult } from '../Models/Order/simulateGuaranteeResult';
 import { GuarantyeeType } from '../Models/Misc/Guarantyeetype';
 import { OrderParameter } from '../Models/Order/OrderParameter';
+import { SearchOrderDTO } from '../Models/Order/SearchOrderDTO';
 @Injectable({
   providedIn: 'root'
 })
@@ -31,7 +32,6 @@ export class OrdersService {
     return this.http.get<Array<Order>>(this.url.nottraded)
   }
   public getArchiveOrdersCollection(pageNumber,pageSize):Observable<any>{
-
     return this.http.get<any>(this.url.archivedOrders+'?pageNumber='+pageNumber+'&pageSize='+pageSize)
   }
 
