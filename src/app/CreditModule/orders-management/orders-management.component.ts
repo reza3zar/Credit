@@ -149,7 +149,7 @@ export class OrdersManagementComponent implements OnInit, OnDestroy {
 
   orderOptentionSelected:string='';
   public changeOrdersOptions(orderOption: string) {
-    this.pageSize=10;
+    this.pageSize=12;
     this.skip=0;
     this.orderOptentionSelected=orderOption;
     switch (this.orderOptentionSelected) {
@@ -256,10 +256,12 @@ export class OrdersManagementComponent implements OnInit, OnDestroy {
         break;
     }
   }
-  totalPages=0;
+  // totalPages=0;
   getArchivedOrders(skip,pageSize){
     this.creditServiceSubscriber = this.orderService.getArchiveOrdersCollection(skip/pageSize+1,pageSize).subscribe(
       result => {
+        
+        // skip/pageSize+1
         this.dataRes = result.items as Order[];
         this.gridData.data = this.dataRes;
         // currentPage=skip/pageSize+1;
@@ -579,6 +581,7 @@ showConfirmForm():void{
   this.confirmFormStatus=true;
 
 }
+
 
 }
 

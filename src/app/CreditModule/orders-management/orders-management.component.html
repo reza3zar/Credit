@@ -74,7 +74,6 @@ mode: 'multiple'
 [pageable]="true" [filter]="filter"
  (filterChange)="filterChange($event)"
  filterable="menu"
-
 (pageChange)="pageChange($event)"
 (dataStateChange)="dataStateChange($event)"
 [skip]="skip"
@@ -118,13 +117,8 @@ filterAndLogic="و"
             همگام سازی سفارشات
         </button>
 
-        <!-- <ng-template kendoPagerTemplate let-totalPages="totalPages" let-currentPage="currentPage">
-            <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
-            <kendo-pager-info></kendo-pager-info>
-            <kendo-pager-next-buttons></kendo-pager-next-buttons>
-            <kendo-pager-page-sizes [pageSizes]="[12, 120, 240]"></kendo-pager-page-sizes>
-         </ng-template> -->
-         <ng-template kendoPagerTemplate let-totalPages="pageSize" let-currentPage="2">
+  
+         <ng-template kendoPagerTemplate let-totalPages="pageSize" let-currentPage="currentPage">
             <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
             <kendo-pager-numeric-buttons [buttonCount]="12"></kendo-pager-numeric-buttons>
             <kendo-pager-info></kendo-pager-info>
